@@ -1,0 +1,91 @@
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+body, html {
+	height: 100%;
+  }
+
+.login-block {
+	background: #de6262; /* fallback for old browsers */
+	background: -webkit-linear-gradient(
+		to bottom,
+		#ffb88c,
+		#de6262
+	); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(
+		to bottom,
+		#9ff7fd,
+		#152dff
+	); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	float: left;
+	width: 100%;
+	padding: 50px 0;
+	height: 100%; 
+}
+.banner-sec {
+	background-size: cover;
+	border-radius: 0 0;
+	padding: 0;
+}
+
+.titulo {
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
+	border: 2px solid cornflowerblue;
+	margin: 0px auto 20px;
+	font-size: 40px;
+	font-weight: bolder;
+	padding: 20px 10px;
+}
+
+.container {
+	background: #fff;
+	border-radius: 0px;
+	box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.carousel-inner {
+	border-radius: 0 0;
+}
+.carousel-caption {
+	text-align: left;
+	left: 5%;
+}
+.login-sec {
+	padding: 50px 30px;
+	position: relative;
+}
+.login-sec .copy-text {
+	position: absolute;
+	width: 80%;
+	bottom: 20px;
+	font-size: 13px;
+	text-align: center;
+}
+.login-sec .copy-text i {
+	color: #feb58a;
+}
+.login-sec .copy-text a {
+	color: #4400ff;
+}
+.login-sec h2 {
+	margin-bottom: 30px;
+	font-weight: 800;
+	font-size: 30px;
+	color: #4400ff;
+}
+.login-sec h2:after {
+	content: " ";
+	width: 150px;
+	height: 5px;
+	background: #fa0303;
+	display: block;
+	margin-top: 20px;
+	border-radius: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.btn-login {
+	background: #4400ff;
+	color: #fff;
+	font-weight: 600;
+}
