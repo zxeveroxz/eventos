@@ -4,10 +4,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Logeo extends CI_Controller
 {
+	public $ORGANIZADOR = NULL;
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('logeo_model', 'logeo', true);
+		$this->load->model('usuarios_model');
+		$this->ORGANIZADOR =  strtoupper($this->uri->segments[1]);
 	}
 	/*
 	public function _remap($method, $params = [])
@@ -37,8 +41,19 @@ class Logeo extends CI_Controller
 		$this->load->view('logeo/index', $data);
 	}
 
+
+
 	public function validar()
 	{
-		echo $this->logeo->validar("hol", "juan");
+		//try {
+		$USU = new Usuarios_model();
+		$USU->CODIGO = strtoupper($this->uri->segments[1]);
+		$r =  $USU->crear('gretel8', '123', 'gretel mendivil', '', '', 'user');
+
+		print_r($r);
+		//echo $this->logeo->validar("hol", "juan");
+		//} catch (Exception $e) {
+		//	echo '</br> <b> Exception Message: ' . $e->getMessage() . $e->getTrace()[0]["class"] 		. '</b>';
+		//}
 	}
 }
