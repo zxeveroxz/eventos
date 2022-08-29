@@ -55,8 +55,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['(:any)'] = 'logeo/ver/$1';
 $route['(:any)/validar'] = 'logeo/validar';
+$route['(:any)/salir'] = 'logeo/salir';
+$route['(:any)/panel'] = 'logeo/panel';
 
 $route['(:any)/usuarios'] = 'usuarios/index';
+$route['(:any)/usuarios/validar'] = 'usuarios/validar';
+$route['(:any)/usuarios/crear'] = 'usuarios/crear';
 
 
 

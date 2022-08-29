@@ -327,7 +327,7 @@ $config['cache_query_string'] = false;
 | https://codeigniter.com/userguide3/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'apoclaipsiZ20apocalipsiZ20';
 
 /*
 |--------------------------------------------------------------------------
@@ -384,12 +384,12 @@ $config['encryption_key'] = '';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = null;
-$config['sess_match_ip'] = false;
+$config['sess_save_path'] = 'ci_sessions';
+$config['sess_match_ip'] = true;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = false;
 
@@ -458,7 +458,7 @@ $config['global_xss_filtering'] = false;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = false;
+$config['csrf_protection'] = true;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;

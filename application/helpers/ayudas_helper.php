@@ -1,4 +1,14 @@
 <?php
+
+function mensaje_error()
+{
+	$CI = &get_instance();
+	if ($CI->session->flashdata("error")) {
+		return $CI->session->flashdata("error");
+	}
+	return false;
+}
+
 function pw_hash($password)
 {
 	return password_hash($password, PASSWORD_DEFAULT, ['cost' => 15]);
