@@ -9,7 +9,7 @@ class Logeo extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('logeo_model', 'logeo', true);
+		$this->load->model('logeo_model');
 		$this->load->model('usuarios_model');
 		$this->ORG =  @strtoupper($this->uri->segments[1]);
 	}
@@ -34,7 +34,8 @@ class Logeo extends CI_Controller
 	public function ver($empresa_codigo = null)
 	{
 		$data = [];
-		$row = $this->logeo->get($empresa_codigo);
+		$LOG = new Logeo_model();
+		$row = $LOG->get($empresa_codigo);
 		if ($row == null)
 			show_404();
 
@@ -50,7 +51,7 @@ class Logeo extends CI_Controller
 	{
 		//try {
 		$USU = new Usuarios_model();
-		$USU->CODIGO = strtoupper($this->uri->segments[1]);
+		$USU->CODIGO = $this->ORG;
 		$r =  $USU->crear('gretel8', '123', 'gretel mendivil', '', '', 'user');
 
 		print_r($r);
@@ -63,7 +64,17 @@ class Logeo extends CI_Controller
 	public function panel()
 	{
 		//print_r($this->session);
-		$this->load->view('panel/index');
+		$data = [];
+		$USU = new Usuarios_model();
+		$USU->CODIGO = $this->ORG;
+		$data["ORG"] = $this->ORG;
+		$data["USU"] = $USU->get($this->session->idx);
+		$data["TOP"] = $this->load->view('panel/top',$data,true);
+		$data["NAV"] = $this->load->view('panel/nav',$data,true);
+		$data["SIDEBAR"] = $this->load->view('panel/sidebar',$data,true);
+		$data["CONTENT"] = $this->load->view('panel/content',$data,true);
+		$data["FOOTER"] = $this->load->view('panel/footer',$data,true);
+		$this->load->view('panel/index',$data);
 	}
 
 	public function salir()

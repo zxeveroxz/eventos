@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+	<!-- plugins:css -->
+	<link rel="stylesheet" href="/eventos/public/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+	<link rel="stylesheet" href="/eventos/public/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
+	<link rel="stylesheet" href="/eventos/public/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
+	<link rel="stylesheet" href="/eventos/public/assets/vendors/css/vendor.bundle.base.css">
+	<link rel="stylesheet" href="/eventos/public/assets/vendors/css/vendor.bundle.addons.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- endinject -->
+	<!-- plugin css for this page -->
+	<!-- End plugin css for this page -->
+	<!-- inject:css -->
+	<link rel="stylesheet" href="/eventos/public/assets/css/shared/style.css">
+	<!-- endinject -->
+	<!-- Layout styles -->
+	<link rel="stylesheet" href="/eventos/public/assets/css/demo_1/style.css">
+	<!-- End Layout styles -->
+	<link rel="shortcut icon" href="/eventos/public/assets/images/favicon.ico" />
+</head>

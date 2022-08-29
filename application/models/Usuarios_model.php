@@ -32,6 +32,11 @@ class Usuarios_model extends CI_Model
 		return $this->db->get_where($this->TABLA, ["idx" => $idx, 'codigo' => $this->CODIGO])->row();
 	}
 
+	public function getAll()
+	{
+		return $this->db->get_where($this->TABLA, ['codigo' => $this->CODIGO])->result();
+	}
+
 	public function validar($usuario, $password)
 	{
 		if ($password == "" || $password == null)
