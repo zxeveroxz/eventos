@@ -97,7 +97,7 @@
 					valor = $input.is(":checked") ? 1 : 0;
 				}
 				formData.append($input.attr('id'), valor);
-				console.log($input.attr('id'), valor);
+				//console.log($input.attr('id'), valor);
 			});
 
 			await fetch($("#formy").attr("action"), {
@@ -105,15 +105,22 @@
 					body: formData
 				})
 				.then((response) => {
-					console.log(response);
+					console.log(response.status);
+					if (response.status != 200) {
+						console.log('error: ', response);
+						alert("Se produjo el siguiente error: " + response.statusText)
+						return false;
+					} else {
+						return response.json();
+					}
+				})
+				.then((data) => {
+					console.log("data:  ", data);
+					$("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
 				})
 				.catch((e) => {
 					//bootbox.alert("Se produjo un error, favor de refrescar la pagina o vuelva a ingresar");
-					console.log(e);
-
-					setTimeout(function() {
-						//  $btn.attr('disabled', false);
-					}, 2000);
+					console.log('catch', e);
 				});
 		}
 	</script>

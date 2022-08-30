@@ -59,7 +59,12 @@ class Usuarios extends CI_Controller
 
 	public function save($tipo = null)
 	{
-		print_r($this->input->post);
+		$USU = new Usuarios_model();
+		$USU->CODIGO = $this->ORG;
+		$USU->save($_POST);
+		$_POST["TOKEN_NAME"] = $this->security->get_csrf_token_name();
+		$_POST['TOKEN_HASH'] = $this->security->get_csrf_hash();
+		echo json_encode($_POST);
 	}
 
 

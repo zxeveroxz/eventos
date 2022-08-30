@@ -75,5 +75,14 @@ class Usuarios_model extends CI_Model
 			echo '</br> <b> Exception Message: ' . $e->getMessage() . $e->getTrace()[0]["class"] 		. '</b>';
 		}
 	}
+
+	public function save($data)
+	{
+		$idx = $data->idx;
+		print_r($data);
+		die;
+		$this->db->where('idx', $idx);
+		$this->db->update('mytable', $data);
+	}
 }
 /* End of file Usuarios_model.php and path \application\models\Usuarios_model.php */
