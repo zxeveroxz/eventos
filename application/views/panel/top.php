@@ -5,7 +5,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+	<title>Administracion de Eventos y Enseñanzas</title>
 	<!-- plugins:css -->
 	<link rel="stylesheet" href="/eventos/public/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 	<link rel="stylesheet" href="/eventos/public/assets/vendors/iconfonts/ionicons/dist/css/ionicons.css">
@@ -24,4 +24,29 @@
 	<link rel="stylesheet" href="/eventos/public/assets/css/demo_1/style.css">
 	<!-- End Layout styles -->
 	<link rel="shortcut icon" href="/eventos/public/assets/images/favicon.ico" />
+
+
+	<script src="/eventos/public/assets/vendors/js/vendor.bundle.base.js"></script>
+	<script src="/eventos/public/assets/vendors/js/vendor.bundle.addons.js"></script>
+
+	<style>
+		.form-control {
+			font-weight: bold;
+			letter-spacing: 0.4px;
+			text-transform: uppercase;
+		}
+
+		.form-control:focus {
+			color: #001EB2;
+			background-color: yellow;
+			border-color: #001EB2;
+		}
+
+		.form-control::placeholder {
+			/* Chrome, Firefox, Opera, Safari 10.1+ */
+			color: gray;
+			opacity: 0.5;
+			/* Firefox */
+		}
+	</style>
 </head>

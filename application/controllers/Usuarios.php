@@ -20,30 +20,46 @@ class Usuarios extends CI_Controller
 		$USU->CODIGO = $this->ORG;
 		$data["ORG"] = $this->ORG;
 		$data["USU"] = $USU->get($this->session->idx);
-		$data["TOP"] = $this->load->view('panel/top',$data,true);
-		$data["NAV"] = $this->load->view('panel/nav',$data,true);
-		$data["SIDEBAR"] = $this->load->view('panel/sidebar',$data,true);
-		$data["CONTENT"] = $this->load->view('usuario/content',$data,true);
-		$data["FOOTER"] = $this->load->view('panel/footer',$data,true);
-		$this->load->view('panel/index',$data);
+		$data["TOP"] = $this->load->view('panel/top', $data, true);
+		$data["NAV"] = $this->load->view('panel/nav', $data, true);
+		$data["SIDEBAR"] = $this->load->view('panel/sidebar', $data, true);
+		$data["CONTENT"] = $this->load->view('usuario/content', $data, true);
+		$data["FOOTER"] = $this->load->view('panel/footer', $data, true);
+		$this->load->view('panel/index', $data);
 	}
 
-	public function get($idx=null)
+	public function get($idx = null, $return = false)
 	{
 		$data = [];
 		$USU = new Usuarios_model();
 		$USU->CODIGO = $this->ORG;
-		if($idx==null)
+		if ($idx == null)
 			$resp = $USU->getAll();
-		else	
+		else {
 			$resp = $USU->get($idx);
+			//$resp->password = md5($resp->password);
+		}
+		if ($return == true)
+			return json_encode($resp);
 
 		echo json_encode($resp);
 	}
 
-	public function editar($idx){
-		$resp = $this->get($idx);
-		print_r($resp);
+	public function editar($idx)
+	{
+
+		$data = [];
+		$USU = new Usuarios_model();
+		$data["ORG"] = $USU->CODIGO = $this->ORG;
+		$data["USU"] = $this->get($idx, true);
+		$data["TOP"] = $this->load->view('panel/top', $data, true);
+		$this->load->view('usuario/editar', $data);
+		//sleep(2);
+	}
+
+	public function save($tipo = null)
+	{
+		print_r($this->input->post);
 	}
 
 
