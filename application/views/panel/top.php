@@ -29,6 +29,9 @@
 	<script src="/eventos/public/assets/vendors/js/vendor.bundle.base.js"></script>
 	<script src="/eventos/public/assets/vendors/js/vendor.bundle.addons.js"></script>
 
+	<!-- toast styles -->
+	<link rel="stylesheet" href="/eventos/public/bt4/css/toast.min.css">
+	<script src="/eventos/public/bt4/js/toast.min.js"></script>
 	<style>
 		.form-control {
 			font-weight: bold;

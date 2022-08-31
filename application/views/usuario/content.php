@@ -1,30 +1,22 @@
+<link href="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
+
+
 <div class="content-wrapper">
 	<div class="row ">
-
 		<div class="col-12">
-			<div class="page-header">
-				<h4 class="page-title">USUARIOS</h4>
-				<div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
-					<ul class="quick-links">
-						<li><a href="#">ICE Market data</a></li>
-						<li><a href="#">Own analysis</a></li>
-						<li><a href="#">Historic market data</a></li>
-					</ul>
-					<ul class="quick-links ml-auto">
-						<li><a href="#">Agregar</a></li>
-					</ul>
-				</div>
+			<div class="page-header bg-white py-1">
+				<h3 class="page-title">USUARIOS</h3>
+				<ul class="quick-links ml-auto ">
+					<li style="border: none;"><button class="btn btn-primary agregar">Agregar</button></li>
+					<li><button class="btn btn-info"><i class="fa fa-refresh" aria-hidden="true"></i></button></li>
+				</ul>
 			</div>
 		</div>
 
 		<div class="col-md-12 ">
 			<div class="card">
 				<div class="card-body">
-
-					<link href="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.css" rel="stylesheet">
-
-					<script src="https://unpkg.com/bootstrap-table@1.21.0/dist/bootstrap-table.min.js"></script>
-
 					<table id="table" class="table-striped" data-toggle="table" data-url="<?= base_url("$ORG/usuarios/get") ?>" data-height="450">
 						<thead>
 							<tr>
@@ -44,7 +36,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditarLabel" aria-hidden="true">
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
 	<div class="modal-dialog  modal-xl" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
@@ -68,16 +60,25 @@
 
 	window.operateEvents = {
 		'click .editar': function(e, value, row, index) {
-			$('#modalEditar .modal-content').prepend('<div class="lloader d-flex justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
-			$('#modalEditar')
+			$('#modalForm .modal-content').prepend('<div class="lloader d-flex justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
+			$('#modalForm')
 				.removeData('bs.modal')
 				.modal('show')
 				.find('.modal-body')
 				.html('<iframe src="<?= base_url("$ORG/usuarios/form/") ?>' + row.idx + '" style="border:none" id="info" height="70px" width="100%"></iframe>');
 		}
-	}
+	};
 
 	$('.modal').on('hidden.bs.modal', function(event) {
 		//console.log(event);
+	});
+
+	$(".agregar").on("click", function() {
+		$('#modalForm .modal-content').prepend('<div class="lloader d-flex justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
+		$('#modalForm')
+			.removeData('bs.modal')
+			.modal('show')
+			.find('.modal-body')
+			.html('<iframe src="<?= base_url("$ORG/usuarios/form/0") ?>" style="border:none" id="info" height="70px" width="100%"></iframe>');
 	});
 </script>
