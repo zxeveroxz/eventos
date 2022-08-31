@@ -1,10 +1,22 @@
 <div class="content-wrapper">
 	<div class="row ">
-		<div class="col-12 col-lg-12 pb-2 d-flex flex-row">
-			<div class="navbar-menu-wrapper d-flex align-items-center">
+
+		<div class="col-12">
+			<div class="page-header">
 				<h4 class="page-title">USUARIOS</h4>
+				<div class="quick-link-wrapper w-100 d-md-flex flex-md-wrap">
+					<ul class="quick-links">
+						<li><a href="#">ICE Market data</a></li>
+						<li><a href="#">Own analysis</a></li>
+						<li><a href="#">Historic market data</a></li>
+					</ul>
+					<ul class="quick-links ml-auto">
+						<li><a href="#">Agregar</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
+
 		<div class="col-md-12 ">
 			<div class="card">
 				<div class="card-body">
@@ -56,14 +68,12 @@
 
 	window.operateEvents = {
 		'click .editar': function(e, value, row, index) {
-			//alert('row: ' + JSON.stringify(row))			
-
 			$('#modalEditar .modal-content').prepend('<div class="lloader d-flex justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
 			$('#modalEditar')
 				.removeData('bs.modal')
 				.modal('show')
 				.find('.modal-body')
-				.html('<iframe src="<?= base_url("$ORG/usuarios/editar/") ?>' + row.idx + '" style="border:none" id="info" height="70px" width="100%"></iframe>');
+				.html('<iframe src="<?= base_url("$ORG/usuarios/form/") ?>' + row.idx + '" style="border:none" id="info" height="70px" width="100%"></iframe>');
 		}
 	}
 

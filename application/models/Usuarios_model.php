@@ -78,11 +78,12 @@ class Usuarios_model extends CI_Model
 
 	public function save($data)
 	{
-		$idx = $data->idx;
-		print_r($data);
-		die;
+		$idx = $data['idx'];
+		unset($data['idx']);
 		$this->db->where('idx', $idx);
-		$this->db->update('mytable', $data);
+		$this->db->update($this->TABLA, $data);
+
+		return $this->db->affected_rows();
 	}
 }
 /* End of file Usuarios_model.php and path \application\models\Usuarios_model.php */

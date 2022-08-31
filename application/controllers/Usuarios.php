@@ -45,7 +45,7 @@ class Usuarios extends CI_Controller
 		echo json_encode($resp);
 	}
 
-	public function editar($idx)
+	public function form($idx)
 	{
 
 		$data = [];
@@ -53,18 +53,23 @@ class Usuarios extends CI_Controller
 		$data["ORG"] = $USU->CODIGO = $this->ORG;
 		$data["USU"] = $this->get($idx, true);
 		$data["TOP"] = $this->load->view('panel/top', $data, true);
-		$this->load->view('usuario/editar', $data);
+		$this->load->view('usuario/form', $data);
 		//sleep(2);
 	}
 
 	public function save($tipo = null)
 	{
+		$RESP = [];
+		$RESP["RESP"] = false;
+		$RESP["TOKEN_NAME"] = $this->security->get_csrf_token_name();
+		$RESP['TOKEN_HASH'] = $this->security->get_csrf_hash();
+
 		$USU = new Usuarios_model();
 		$USU->CODIGO = $this->ORG;
-		$USU->save($_POST);
-		$_POST["TOKEN_NAME"] = $this->security->get_csrf_token_name();
-		$_POST['TOKEN_HASH'] = $this->security->get_csrf_hash();
-		echo json_encode($_POST);
+
+		$RESP["RESP"] = $USU->save($_POST);
+		
+		echo json_encode($RESP);
 	}
 
 

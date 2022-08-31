@@ -60,7 +60,7 @@ $route['(:any)/panel'] = 'logeo/panel';
 
 $route['(:any)/usuarios'] = 'usuarios/index';
 $route['(:any)/usuarios/get'] = 'usuarios/get';
-$route['(:any)/usuarios/editar/(:any)'] = 'usuarios/editar/$2';
+$route['(:any)/usuarios/form/(:any)'] = 'usuarios/form/$2';
 $route['(:any)/usuarios/validar'] = 'usuarios/validar';
 $route['(:any)/usuarios/crear'] = 'usuarios/crear';
 $route['(:any)/usuarios/save'] = 'usuarios/save';

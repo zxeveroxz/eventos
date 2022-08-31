@@ -8,9 +8,9 @@
 			</div>
 			<div class="card-body">
 
-				<form <?php
-						echo form_open(base_url("$ORG/usuarios/save"), ['class' => '', 'id' => 'formy', 'method' => 'POST']);
-						?><input type="hidden" id="idx" value="">
+				<?= form_open(base_url("$ORG/usuarios/save"), ['class' => '', 'id' => 'formy', 'method' => 'POST']);
+						?>
+               <input type="hidden" id="idx" value="">
 					<div class="row">
 						<div class="col-5">
 							<div class="form-group">
@@ -58,7 +58,7 @@
 
 					<button type="submit" class="btn btn-md btn-success mr-2 ">Guardar</button>
 					<button class="btn btn-md btn-danger float-right" type="button" onclick="emitir()">Cancelar</button>
-				</form>
+				<?=form_close()?>
 
 			</div>
 		</div>
@@ -87,9 +87,8 @@
 
 		});
 
-		let emitir = async () => {
+		let formDATOS = () => {
 			let formData = new FormData();
-
 			$(".formy, input[type='hidden'] ").each((i, v) => {
 				$input = $(v);
 				let valor = $input.hasClass('numero') ? $input.val().replace(/,/g, '') : $input.val();
@@ -99,15 +98,17 @@
 				formData.append($input.attr('id'), valor);
 				//console.log($input.attr('id'), valor);
 			});
+			return formData;
+		}
 
+
+		let emitir = async () => {
 			await fetch($("#formy").attr("action"), {
 					method: 'POST',
-					body: formData
+					body: formDATOS()
 				})
 				.then((response) => {
-					console.log(response.status);
 					if (response.status != 200) {
-						console.log('error: ', response);
 						alert("Se produjo el siguiente error: " + response.statusText)
 						return false;
 					} else {
@@ -115,29 +116,19 @@
 					}
 				})
 				.then((data) => {
-					console.log("data:  ", data);
 					$("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
 				})
 				.catch((e) => {
-					//bootbox.alert("Se produjo un error, favor de refrescar la pagina o vuelva a ingresar");
 					console.log('catch', e);
 				});
 		}
 	</script>
 
 
-
-
-	<!-- plugins:js -->
-
-	<!-- endinject -->
-	<!-- Plugin js for this page-->
-	<!-- End plugin js for this page-->
-	<!-- inject:js -->
 	<script src="/eventos/public/assets/js/shared/off-canvas.js"></script>
 	<script src="/eventos/public/assets/js/shared/misc.js"></script>
-	<!-- endinject -->
-	<!-- Custom js for this page-->
+
+   
 	<script src="/eventos/public/assets/js/demo_1/dashboard.js"></script>
 
 </body>
