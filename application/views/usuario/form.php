@@ -147,11 +147,12 @@
 			content: contenido,
 			type: tipo=="ok"?"success":"error",
 			delay: tiempo,
-			dismissible: true
+			dismissible: true,
+			position:"bottom-center"
+
 		});
 	}	
 
-		
 	</script>
 
 
