@@ -10,7 +10,7 @@
 
 				<?= form_open(base_url("$ORG/usuarios/save"), ['class' => '', 'id' => 'formy', 'method' => 'POST']);
 				?>
-				<input type="hidden" id="idx" value="">
+				<input type="hidden" id="idx" value="0">
 				<div class="row">
 					<div class="col-5">
 						<div class="form-group">
@@ -43,12 +43,23 @@
 					<input type="email" class="form-control formy" id="correo" placeholder="Correo Electronico">
 				</div>
 
-				<div class="form-group">
-					<label for="nivel">Nivel</label>
-					<select class="custom-select formy" id="nivel">
-						<option value="user">Usuario</option>
-						<option value="admin">Admin</option>
-					</select>
+				<div class="row">
+					<div class="col-7">
+						<div class="form-group">
+							<label for="password">Clave de Usuario</label>
+							<input type="text" class="form-control text-primary formy" id="password">
+						</div>
+					</div>
+
+					<div class="col-5">
+						<div class="form-group">
+							<label for="nivel">Nivel</label>
+							<select class="form-control formy" id="nivel">
+								<option value="user">Usuario</option>
+								<option value="admin">Admin</option>
+							</select>
+						</div>
+					</div>
 				</div>
 
 				<div class="form-group">
@@ -74,11 +85,11 @@
 			$("#nombre").val(row.nombre);
 			$("#usuario").val(row.usuario);
 			$("#correo").val(row.correo);
+			$("#password").val(row.password).prop("disabled", true);
 			$("#nivel").val(row.nivel);
 			$("#detalles").val(row.detalles);
 			$("#fecha").val(row.fecha);
 			$("#estado").prop("checked", row.estado != 0 ? true : false);
-
 		}
 
 		llenar(<?= ($USU) ?>);
@@ -89,6 +100,7 @@
 			let h = $("#principal").height();
 			parent.$("#info").attr('height', h + 10);
 
+			
 		});
 
 		let formDATOS = () => {
@@ -100,11 +112,10 @@
 					valor = $input.is(":checked") ? 1 : 0;
 				}
 				formData.append($input.attr('id'), valor);
-				//console.log($input.attr('id'), valor);
+				console.log($input.attr('id'), valor);
 			});
 			return formData;
 		}
-
 
 		let emitir = async () => {
 			await fetch($("#formy").attr("action"), {
@@ -115,24 +126,33 @@
 					if (response.status != 200) {
 						alert("Se produjo el siguiente error: " + response.statusText)
 						return false;
-					} else {
+					} else
 						return response.json();
-					}
 				})
 				.then((data) => {
+					toast("todo ok");
 					$("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+					
 				})
 				.catch((e) => {
 					console.log('catch', e);
+					
 				});
 		}
+
+	const toast = (contenido,tipo="ok",tiempo=3000)=>{
+		$.toast({
+			title: 'Mensaje',
+			//subtitle: '11 mins ago',
+			content: contenido,
+			type: tipo=="ok"?"success":"error",
+			delay: tiempo,
+			dismissible: true
+		});
+	}	
+
+		
 	</script>
 
-
-	<script src="/eventos/public/assets/js/shared/off-canvas.js"></script>
-	<script src="/eventos/public/assets/js/shared/misc.js"></script>
-
-
-	<script src="/eventos/public/assets/js/demo_1/dashboard.js"></script>
 
 </body>

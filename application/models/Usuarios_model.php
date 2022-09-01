@@ -52,6 +52,23 @@ class Usuarios_model extends CI_Model
 			return false;
 	}
 
+	public function crear2($post=[])
+	{
+		try {
+			$this->check_codigo();
+			
+			$post["codigo"]=$this->CODIGO;
+			$post["fecha"]=$this->fecha;
+			$post["password"]=pw_hash($post["password"]);
+			$this->db->insert($this->TABLA, $post);
+
+			$resp = $this->db->insert_id() ?: $this->db->error()["message"];
+			return $resp;
+		} catch (Exception $e) {
+			echo '</br> <b> Exception Message: ' . $e->getMessage() . $e->getTrace()[0]["class"] 		. '</b>';
+		}
+	}
+
 	public function crear($usuario, $password, $nombre, $correo, $detalles, $nivel)
 	{
 		try {

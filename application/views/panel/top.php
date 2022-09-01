@@ -29,6 +29,11 @@
 	<script src="/eventos/public/assets/vendors/js/vendor.bundle.base.js"></script>
 	<script src="/eventos/public/assets/vendors/js/vendor.bundle.addons.js"></script>
 
+
+	<script src="/eventos/public/assets/js/shared/off-canvas.js"></script>
+	<script src="/eventos/public/assets/js/shared/misc.js"></script>
+	<script src="/eventos/public/assets/js/demo_1/dashboard.js"></script>
+
 	<!-- toast styles -->
 	<link rel="stylesheet" href="/eventos/public/bt4/css/toast.min.css">
 	<script src="/eventos/public/bt4/js/toast.min.js"></script>

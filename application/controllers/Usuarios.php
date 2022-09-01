@@ -57,7 +57,7 @@ class Usuarios extends CI_Controller
 		//sleep(2);
 	}
 
-	public function save($tipo = null)
+	public function save()
 	{
 		$RESP = [];
 		$RESP["RESP"] = false;
@@ -67,8 +67,13 @@ class Usuarios extends CI_Controller
 		$USU = new Usuarios_model();
 		$USU->CODIGO = $this->ORG;
 
-		$RESP["RESP"] = $USU->save($_POST);
-		
+		if ($_POST["idx"] == "" || $_POST["idx"] == 0) {
+			$RESP["RESP"] = $USU->crear2($_POST);
+		} else {
+			unset($_POST["password"]);
+			$RESP["RESP"] = $USU->save($_POST);
+		}
+
 		echo json_encode($RESP);
 	}
 
