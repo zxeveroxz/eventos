@@ -5,7 +5,7 @@
 <div class="content-wrapper">
 	<div class="row ">
 		<div class="col-12">
-			<div class="page-header bg-white py-1">
+			<div class="page-header bg-white py-1 px-2 border-bottom border-dark ">
 				<h3 class="page-title">USUARIOS</h3>
 				<ul class="quick-links ml-auto ">
 					<li style="border: none;"><button class="btn btn-primary agregar">Agregar</button></li>
@@ -60,7 +60,7 @@
 
 	window.operateEvents = {
 		'click .editar': function(e, value, row, index) {
-			$('#modalForm .modal-content').prepend('<div class="lloader d-flex justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
+			$('#modalForm .modal-content').prepend('<div class="lloader d-flex  justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
 			$('#modalForm')
 				.removeData('bs.modal')
 				.modal('show')
