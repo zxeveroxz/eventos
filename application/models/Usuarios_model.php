@@ -86,7 +86,7 @@ class Usuarios_model extends CI_Model
 				"fecha" => $this->fecha
 			]);
 
-			$resp = $this->db->insert_id() ?: $this->db->error()["message"];
+			$resp = $this->db->insert_id()>0 ?$this->db->insert_id(): $this->db->error()["message"];
 			return $resp;
 		} catch (Exception $e) {
 			echo '</br> <b> Exception Message: ' . $e->getMessage() . $e->getTrace()[0]["class"] 		. '</b>';
@@ -100,7 +100,7 @@ class Usuarios_model extends CI_Model
 		$this->db->where('idx', $idx);
 		$this->db->update($this->TABLA, $data);
 
-		return $this->db->affected_rows();
+		return $this->db->affected_rows()>0?$this->db->affected_rows():$this->db->error()["message"];
 	}
 }
 /* End of file Usuarios_model.php and path \application\models\Usuarios_model.php */
