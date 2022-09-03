@@ -8,8 +8,8 @@
 			<div class="page-header bg-white py-1 px-2 border-bottom border-dark ">
 				<h3 class="page-title">USUARIOS</h3>
 				<ul class="quick-links ml-auto ">
-					<li style="border: none;"><button class="btn btn-primary agregar">Agregar</button></li>
-					<li><button class="btn btn-info"><i class="fa fa-refresh" aria-hidden="true"></i></button></li>
+					<li style="border: none;"><button class="btn btn-primary" id="agregar">Agregar</button></li>
+					<li><button class="btn btn-info" id="actualizar"><i class="fa fa-refresh" aria-hidden="true"></i></button></li>
 				</ul>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
 		//console.log(event);
 	});
 
-	$(".agregar").on("click", function() {
+	$("#agregar").on("click", function() {
 		$('#modalForm .modal-content').prepend('<div class="lloader d-flex justify-content-center pt-5"><div class=" spinner-border text-primary" role="status"></div></div>');
 		$('#modalForm')
 			.removeData('bs.modal')
@@ -81,4 +81,8 @@
 			.find('.modal-body')
 			.html('<iframe src="<?= base_url("$ORG/usuarios/form/0") ?>" style="border:none" id="info" height="70px" width="100%"></iframe>');
 	});
+
+	$("#actualizar").on("click",function(){
+		$table.bootstrapTable('refresh');
+	})
 </script>

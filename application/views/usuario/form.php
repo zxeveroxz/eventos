@@ -67,7 +67,7 @@
                     <textarea class="form-control formy" id="detalles" rows="2"></textarea>
                 </div>
 
-                <button type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir()">Guardar</button>
+                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir()">Guardar</button>
                 <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar()">Cancelar</button>
                 <?= form_close() ?>
 
@@ -75,6 +75,8 @@
         </div>
     </div>
     <script>
+        let btn_submit = $("#submit");
+
         let llenar = (row) => {
             $("#id").html("NUEVO");
             $("#fecha").val(new Date().toLocaleString());
@@ -116,7 +118,7 @@
         }
 
         let emitir = async () => {
-            
+            btn_submit.attr("disabled",true).html("Procesando....");
             await fetch($("#formy").attr("action"), {
                     method: 'POST',
                     body: await formDATOS()
@@ -136,9 +138,9 @@
                             cancelar();
                         }
                     } else
-                        toast("Error: No se realizo ningun cambio<hr>" + data.RESP);
+                        toast("Error: No se realizo ningun cambio<hr>" + data.RESP,"error");
                     $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
-                  
+                    btn_submit.attr("disabled",false).html("Guardar");
 
                 })
                 .catch((e) => {
@@ -148,24 +150,16 @@
         }
 
         const toast = (contenido, tipo = "ok", tiempo = 3000) => {
-            $.toast({
-                title: 'Mensaje',
-                //subtitle: '11 mins ago',
-                content: contenido,
-                type: tipo == "ok" ? "success" : "error",
-                delay: tiempo,
-                dismissible: true,
-                position: "bottom-center"
-            });
+            parent.toast(contenido,tipo,tiempo);
         }
 
         $(document).ready(function() {
 
-            /*
-            $("#formy").onSubmit((e)=>{
+            
+           $("#formy").submit((e)=>{
                 e.preventDefault();
-            })
-            */
+           });
+            
 
             //cambiar el tamaño del modal 
             parent.$(".lloader").remove();

@@ -91,6 +91,19 @@
     window.closeModal = function() {
         $('.modal').modal('hide');
     };
+
+
+    window.toast = (contenido, tipo = "ok", tiempo = 3000) => {
+            $.toast({
+                title: 'Mensaje',
+                //subtitle: '11 mins ago',
+                content: contenido,
+                type: tipo == "ok" ? "success" : "error",
+                delay: tiempo,
+                dismissible: true,
+                position: "bottom-center"
+            });
+        }
     </script>
 </head>
 <div id="loading"></div>
