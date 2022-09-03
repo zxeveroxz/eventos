@@ -36,6 +36,9 @@
     <!-- toast styles -->
     <link rel="stylesheet" href="/eventos/public/bt4/css/toast.min.css">
     <script src="/eventos/public/bt4/js/toast.min.js"></script>
+
+
+
     <style>
     .form-control {
         font-weight: bold;

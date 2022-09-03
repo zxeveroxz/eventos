@@ -67,8 +67,8 @@
                     <textarea class="form-control formy" id="detalles" rows="2"></textarea>
                 </div>
 
-                <button class="btn btn-md btn-primary mr-2 " onclick="emitir()">Guardar</button>
-                <button class="btn btn-md btn-danger float-right" onclick="cancelar()">Cancelar</button>
+                <button type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir()">Guardar</button>
+                <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar()">Cancelar</button>
                 <?= form_close() ?>
 
             </div>
@@ -119,7 +119,7 @@
             
             await fetch($("#formy").attr("action"), {
                     method: 'POST',
-                    body: formDATOS()
+                    body: await formDATOS()
                 })
                 .then((response) => {
                     if (response.status != 200) {
@@ -136,7 +136,7 @@
                             cancelar();
                         }
                     } else
-                        toast("Error al realizar la Operacioin<hr>" + data.RESP);
+                        toast("Error: No se realizo ningun cambio<hr>" + data.RESP);
                     $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
                   
 
@@ -161,9 +161,11 @@
 
         $(document).ready(function() {
 
+            /*
             $("#formy").onSubmit((e)=>{
                 e.preventDefault();
             })
+            */
 
             //cambiar el tamaño del modal 
             parent.$(".lloader").remove();
