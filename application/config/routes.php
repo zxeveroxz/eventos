@@ -58,13 +58,18 @@ $route['(:any)/validar'] = 'logeo/validar';
 $route['(:any)/salir'] = 'logeo/salir';
 $route['(:any)/panel'] = 'logeo/panel';
 
-$route['(:any)/usuarios'] = 'usuarios/index';
-$route['(:any)/usuarios/get'] = 'usuarios/get';
-$route['(:any)/usuarios/form/(:any)'] = 'usuarios/form/$2';
-$route['(:any)/usuarios/validar'] = 'usuarios/validar';
-$route['(:any)/usuarios/crear'] = 'usuarios/crear';
-$route['(:any)/usuarios/save'] = 'usuarios/save';
 
+$CASOS = ['usuarios','eventos','participantes'];
+
+
+foreach($CASOS as $c){
+    $route["(:any)/$c"] = "$c/index";
+    $route["(:any)/$c/get"] = "$c/get";
+    $route["(:any)/$c/form/(:any)"] = "$c/form/$2";
+    $route["(:any)/$c/validar"] = "$c/validar";
+    $route["(:any)/$c/crear"] = "$c/crear";
+    $route["(:any)/$c/save"] = "$c/save";
+}
 
 
 

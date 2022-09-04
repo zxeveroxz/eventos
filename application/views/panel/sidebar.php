@@ -29,9 +29,9 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="pages/forms/basic_elements.html">
+						<a class="nav-link" href="<?=base_url("$ORG/participantes");?>">
 							<i class="menu-icon typcn typcn-shopping-bag"></i>
-							<span class="menu-title">Form elements</span>
+							<span class="menu-title">Participantes</span>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -62,6 +62,9 @@
 							<ul class="nav flex-column sub-menu">
 								<li class="nav-item">
 									<a class="nav-link" href="<?=base_url("$ORG/usuarios");?>"> Usuarios </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="<?=base_url("$ORG/eventos");?>"> Eventos </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="pages/samples/login.html"> Login </a>

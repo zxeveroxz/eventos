@@ -1,10 +1,10 @@
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><?=$ORG?></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html">
+        <a class="navbar-brand brand-logo" href="<?=base_url("$ORG/panel");?>"><?=$ORG?></a>
+        <a class="navbar-brand brand-logo-mini" href="<?=base_url("$ORG/panel");?>">
             <img src="/eventos/public/assets/images/logo-mini.svg" alt="logo" /></a>
     </div>
-    <div class="navbar-menu-wrapper d-flex align-items-center">
+    <div class="navbar-menu-wrapper d-flex align-items-center ">
         <ul class="navbar-nav">
             <li class="nav-item font-weight-semibold d-none d-lg-block">Ayuda : +51 939 051 009</li>            
         </ul>
