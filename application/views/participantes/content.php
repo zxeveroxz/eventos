@@ -48,21 +48,21 @@
 </div>
 
 <script>
-	var $table = $('#table')
+	var $table = $('#table');
 
     function unir_nombre(value, row, index) {
 		return [
 			`${row.pat} ${row.mat} ${row.nombres}`
-		].join('')
-	}
+		].join('');
+	};
 
 	function operateFormatter(value, row, index) {
 		return [
-			'<a class="editar" href="javascript:void(0)" title="Editar ' + row.nombre + '">',
+			'<a class="editar" href="javascript:void(0)" title="Editar ' + row.nombres + '">',
 			'<i class="fa fa-pencil-square-o" ></i> Editar',
 			'</a>'
-		].join('')
-	}
+		].join('');
+	};
 
 
 	window.operateEvents = {
@@ -77,7 +77,7 @@
 	};
 
 	$('.modal').on('hidden.bs.modal', function(event) {
-		//console.log(event);
+		/*console.log(event);*/
 	});
 
 	$("#agregar").on("click", function() {
@@ -91,5 +91,5 @@
 
 	$("#actualizar").on("click",function(){
 		$table.bootstrapTable('refresh');
-	})
+	});
 </script>

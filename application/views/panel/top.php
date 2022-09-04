@@ -96,7 +96,7 @@
     window.toast = (contenido, tipo = "ok", tiempo = 3000) => {
             $.toast({
                 title: 'Mensaje',
-                //subtitle: '11 mins ago',
+                /*subtitle: '11 mins ago',*/
                 content: contenido,
                 type: tipo == "ok" ? "success" : "error",
                 delay: tiempo,

@@ -45,8 +45,7 @@ class Participantes extends CI_Controller {
 	}
 
 	public function form($idx)
-	{
-
+	{		
 		$data = [];
 		$PAR = new Participantes_model();
 		$data["ORG"] = $PAR->CODIGO = $this->ORG;

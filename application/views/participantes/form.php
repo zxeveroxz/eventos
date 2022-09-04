@@ -90,8 +90,8 @@
 
                 
                 <hr/>
-                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir()">Guardar</button>
-                <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar()">Cancelar</button>
+                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir();">Guardar</button>
+                <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar();">Cancelar/Cerrar</button>
                 <?= form_close() ?>
 
             </div>
@@ -121,14 +121,15 @@
             $("#fecha").val(row.fecha);
             $("#estado").prop("checked", row.estado != 0 ? true : false);
 
-        }
+        };
+
         llenar(<?= ($PAR) ?>);
 
 
 
         let cancelar = () => {
             window.parent.closeModal();
-        }
+        };
 
         let formDATOS = () => {
             let formData = new FormData();
@@ -139,10 +140,10 @@
                     valor = $input.is(":checked") ? 1 : 0;
                 }
                 formData.append($input.attr('id'), valor);
-                //console.log($input.attr('id'), valor);
+                /*console.log($input.attr('id'), valor);*/
             });
             return formData;
-        }
+        };
 
         let emitir = async () => {
             btn_submit.attr("disabled", true).html("Procesando....");
@@ -152,7 +153,7 @@
                 })
                 .then((response) => {
                     if (response.status != 200) {
-                        alert("Se produjo el siguiente error: " + response.statusText)
+                        alert("Se produjo el siguiente error: " + response.statusText);
                         cancelar();
                         return false;
                     } else
@@ -174,11 +175,11 @@
                     console.log('catch', e);
 
                 });
-        }
+        };
 
         const toast = (contenido, tipo = "ok", tiempo = 3000) => {
             parent.toast(contenido, tipo, tiempo);
-        }
+        };
 
         $(document).ready(function() {
 
@@ -188,10 +189,10 @@
             });
 
 
-            //cambiar el tamaño del modal 
+            /*cambiar el tamaño del modal */
             parent.$(".lloader").remove();
             let principal = $("#principal");
-            principal.removeClass('fade')
+            principal.removeClass('fade');
             parent.$("#info").attr('height', principal.height() + 10);
 
         });
