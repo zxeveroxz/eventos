@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'jsjperu.org',
+	'hostname' => '25.3.118.76',
 	'username' => 'eventos',
-	'password' => 'apocalipsiZ20',
+	'password' => '@pocalipsiZ2002+',
 	'database' => 'eventos',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
