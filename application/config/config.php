@@ -103,7 +103,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = true;
+$config['enable_hooks'] = false;
 
 /*
 |--------------------------------------------------------------------------
@@ -463,7 +463,7 @@ $config['csrf_token_name'] = 'csrf_token';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = true;
-$config['csrf_exclude_uris'] = [];
+$config['csrf_exclude_uris'] = ['ubigeo/*',];
 
 /*
 |--------------------------------------------------------------------------

@@ -59,7 +59,7 @@ $route['(:any)/salir'] = 'logeo/salir';
 $route['(:any)/panel'] = 'logeo/panel';
 
 
-$CASOS = ['usuarios','eventos','participantes'];
+$CASOS = ['usuarios','eventos','participantes','ubigeo'];
 
 
 foreach($CASOS as $c){
@@ -70,6 +70,11 @@ foreach($CASOS as $c){
     $route["(:any)/$c/crear"] = "$c/crear";
     $route["(:any)/$c/save"] = "$c/save";
 }
+
+$route["(:any)/ubigeo/ver"] = "ubigeo/ver";
+$route["(:any)/ubigeo/dep"] = "ubigeo/dep";
+$route["(:any)/ubigeo/pro/(:any)"] = "ubigeo/pro/$2";
+$route["(:any)/ubigeo/dis/(:any)/(:any)"] = "ubigeo/dis/$2/$3";
 
 
 
