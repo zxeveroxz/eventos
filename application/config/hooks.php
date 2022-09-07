@@ -16,8 +16,15 @@ use Dotenv\Dotenv;
 
 # Load phpdotenv
 $hook['pre_system'] = function () {
-    $dotenv = Dotenv::create(FCPATH); //FCPATH=>raiz principal
+    try{
+    $dotenv = Dotenv::create(FCPATH); //FCPATH=>raiz principal FCPATH
     $dotenv->load();
+    }catch(Exception $e ){
+        echo "Verifique las Variables de Entorno '.env' <hr/>";
+        echo $e->getMessage();
+        die();
+    }
+
 };
 
 
