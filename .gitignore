@@ -22,4 +22,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /nbproject/
 .idea/*
 
-application/config/database.php
+
+.env
