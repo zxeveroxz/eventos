@@ -2,6 +2,7 @@
  
 function compress()
 {
+
   $CI =& get_instance();
   $buffer = $CI->output->get_output();
  
@@ -19,6 +20,7 @@ function compress()
        '\\1'
     );
  
+if(getenv('COMPRIMIR')==1)
   $buffer = preg_replace($search, $replace, $buffer);
  
   $CI->output->set_output($buffer);

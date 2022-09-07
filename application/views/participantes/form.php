@@ -228,8 +228,7 @@
                     data.map((c) => {
                         $dep.append(`<option value="${c.dep}">${c.dep}</option>`);
                     });
-                });
-                $dep                   
+                });                                  
 
             /*cambiar el tamaño del modal */
             parent.$(".lloader").remove();

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -12,6 +12,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
+use Dotenv\Dotenv;
+
+# Load phpdotenv
+$hook['pre_system'] = function () {
+    $dotenv = Dotenv::create(FCPATH); //FCPATH=>raiz principal
+    $dotenv->load();
+};
+
 
 // compress output
 $hook['display_override'][] = array(
@@ -19,4 +27,4 @@ $hook['display_override'][] = array(
     'function' => 'compress',
     'filename' => 'compress.php',
     'filepath' => 'hooks'
-    );
+);
