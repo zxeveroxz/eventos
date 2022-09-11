@@ -40,60 +40,75 @@
 
 
     <style>
-    .form-control {
-        font-weight: bold;
-        letter-spacing: 0.4px;
-        text-transform: uppercase;
-    }
-
-    .form-control:focus {
-        color: #001EB2;
-        background-color: yellow;
-        border-color: #001EB2;
-    }
-
-    .form-control::placeholder {
-        /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: gray;
-        opacity: 0.5;
-        /* Firefox */
-    }
-
-
-    #loading {
-        position: fixed;
-        z-index: 99999;
-        width: 2rem;
-        height: 2rem;
-        border: 5px solid #f3f3f3;
-        border-top: 6px solid #9c41f2;
-        border-radius: 100%;
-        margin: auto;
-        visibility: hidden;
-        animation: spin 1s infinite linear;
-    }
-
-    #loading.display {
-        visibility: visible;
-    }
-
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
+        .form-control {
+            font-weight: bold;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
         }
 
-        to {
-            transform: rotate(360deg);
+        .form-control:focus {
+            color: #001EB2;
+            background-color: yellow;
+            border-color: #001EB2;
         }
-    }
+
+        .form-control::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: gray;
+            opacity: 0.5;
+            /* Firefox */
+        }
+
+        .form-group {
+            margin-bottom: 0.7rem
+        }
+
+        .form-group label {
+            margin-bottom: 0px;
+        }
+        .card .card-body{
+            padding: 1.5rem 1.5rem 1.0rem;
+        }
+
+        .modal-body{
+            padding-bottom: 0.5rem;
+        }
+     
+
+        #loading {
+            position: fixed;
+            z-index: 99999;
+            width: 2rem;
+            height: 2rem;
+            border: 5px solid #f3f3f3;
+            border-top: 6px solid #9c41f2;
+            border-radius: 100%;
+            margin: auto;
+            visibility: hidden;
+            animation: spin 1s infinite linear;
+        }
+
+        #loading.display {
+            visibility: visible;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     <script>
-    window.closeModal = function() {
-        $('.modal').modal('hide');
-    };
+        window.closeModal = function() {
+            $('.modal').modal('hide');
+        };
 
 
-    window.toast = (contenido, tipo = "ok", tiempo = 3000) => {
+        window.toast = (contenido, tipo = "ok", tiempo = 3000) => {
             $.toast({
                 title: 'Mensaje',
                 /*subtitle: '11 mins ago',*/

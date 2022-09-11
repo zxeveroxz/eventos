@@ -19,12 +19,12 @@
 					<table id="table" class="table-striped" data-toggle="table" data-url="<?= base_url("$ORG/participantes/get") ?>" data-height="450">
 						<thead>
 							<tr>
-								<th data-field="idx"  data-formatter="operateFormatter" data-events="operateEvents" data-halign="center" data-align="center" data-width="35">-</th>
-								
+								<th data-field="idx" data-formatter="operateFormatter" data-events="operateEvents" data-halign="center" data-align="center" data-width="35">-</th>
+
 								<th data-field="nro_doc" data-width="100" data-halign="center">DOCUMENTO</th>
 								<th data-field="pat" data-halign="center" data-formatter="unir_nombre">APELLIDOS Y NOMBRES</th>
-                                <th data-field="telefono" data-width="100" data-halign="center">TELFONO</th>
-                                <th data-field="correo" data-width="200" data-halign="center">CORREO</th>
+								<th data-field="telefono" data-width="100" data-halign="center">TELFONO</th>
+								<th data-field="correo" data-width="200" data-halign="center">CORREO</th>
 								<th data-field="estado" data-width="80" data-halign="center" data-align="center">ESTADO</th>
 							</tr>
 						</thead>
@@ -49,7 +49,7 @@
 <script>
 	var $table = $('#table');
 
-    function unir_nombre(value, row, index) {
+	function unir_nombre(value, row, index) {
 		return [
 			`${row.pat} ${row.mat} ${row.nombres}`
 		].join('');
@@ -88,7 +88,7 @@
 			.html('<iframe src="<?= base_url("$ORG/participantes/form/0") ?>" style="border:none" id="info" height="70px" width="100%"></iframe>');
 	});
 
-	$("#actualizar").on("click",function(){
+	$("#actualizar").on("click", function() {
 		$table.bootstrapTable('refresh');
 	});
 </script>

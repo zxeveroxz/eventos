@@ -115,8 +115,6 @@
                     </div>
                 </div>
 
-
-                <hr />
                 <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir();">Guardar</button>
                 <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar();">Cancelar/Cerrar</button>
                 <?= form_close() ?>
@@ -130,7 +128,7 @@
         var $dis = $("#dis");
         let btn_submit = $("#submit");
 
-        let llenar =async (row) => {
+        let llenar = async (row) => {
             $("#id").html("NUEVO");
             $("#fecha").val(new Date().toLocaleString());
             if (row == null) return;
@@ -147,8 +145,8 @@
             $("#fijo").val(row.fijo);
             $("#telefono").val(row.telefono);
             $("#telefono2").val(row.telefono2);
-            await $("#dep").prepend(`<option value="${row.dep}" selected>${row.dep}</option>`);            
-            await $("#pro").prepend(`<option value="${row.pro}" selected>${row.pro}</option>`);                       
+            await $("#dep").prepend(`<option value="${row.dep}" selected>${row.dep}</option>`);
+            await $("#pro").prepend(`<option value="${row.pro}" selected>${row.pro}</option>`);
             await $("#dis").prepend(`<option value="${row.dis}" selected>${row.dis}</option>`);
             $("#direccion").val(row.direccion);
             $("#localidad").val(row.localidad);
@@ -228,7 +226,7 @@
                     data.map((c) => {
                         $dep.append(`<option value="${c.dep}">${c.dep}</option>`);
                     });
-                });                                  
+                });
 
             /*cambiar el tamaño del modal */
             parent.$(".lloader").remove();
@@ -254,13 +252,13 @@
                     $dis.append(`<option value="-">-</option>`);
                 });
             $pro.change();
-            $("#dep option:first").attr("disabled",true);
+            $("#dep option:first").attr("disabled", true);
         });
 
         $pro.change(function() {
             $dis.empty();
             $dis.append(`<option value="">Cargando...</option>`);
-            fetch("<?= base_url("$ORG/ubigeo/dis") ?>/" + $dep.val()+"/"+ $pro.val())
+            fetch("<?= base_url("$ORG/ubigeo/dis") ?>/" + $dep.val() + "/" + $pro.val())
                 .then(async r => {
                     return await r.json();
                 })
