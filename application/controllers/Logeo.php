@@ -33,16 +33,20 @@ class Logeo extends CI_Controller
 
 	public function ver($empresa_codigo = null)
 	{
+		
 		$data = [];
 		$LOG = new Logeo_model();
-		$row = $LOG->get($empresa_codigo);
+		
+		$row = $LOG->get($empresa_codigo);		
 		if ($row == null)
 			show_404();
 
 		$data["ORG"] = $this->ORG;
 		$data["nombre"] = $row->nombre;
-		$data['css'] = $this->load->view('logeo/index.css', null, true);
-		$this->load->view('logeo/index', $data);
+		
+		$data['css'] = $this->load->view('logeo/index.css', null, true);		
+		echo $this->load->view('logeo/index', $data,true);
+		
 	}
 
 
@@ -74,7 +78,7 @@ class Logeo extends CI_Controller
 		$data["SIDEBAR"] = $this->load->view('panel/sidebar',$data,true);
 		$data["CONTENT"] = $this->load->view('panel/content',$data,true);
 		$data["FOOTER"] = $this->load->view('panel/footer',$data,true);
-		$this->load->view('panel/index',$data);
+		echo $this->load->view('panel/index',$data,true);
 	}
 
 	public function salir()

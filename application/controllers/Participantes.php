@@ -29,7 +29,7 @@ class Participantes extends CI_Controller {
 		$data["SIDEBAR"] = $this->load->view('panel/sidebar', $data, true);
 		$data["CONTENT"] = $this->load->view('participantes/content', $data, true);
 		$data["FOOTER"] = $this->load->view('panel/footer', $data, true);
-		$this->load->view('panel/index', $data);
+		echo $this->load->view('panel/index', $data, true);
 	}
 
 	public function get($idx = null, $return = false)
@@ -55,7 +55,7 @@ class Participantes extends CI_Controller {
 		$data["ORG"] = $this->ORG;
 		$data["PAR"] = $this->get($idx, true);
 		$data["TOP"] = $this->load->view('panel/top', $data, true);
-		$this->load->view('participantes/form', $data);
+		echo $this->load->view('participantes/form', $data,true);
 		//sleep(2);
 	}
 

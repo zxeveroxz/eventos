@@ -3,5 +3,5 @@ DB_HOSTNAME="10.0.0.24"
 DB_USER="eventos"
 DB_PASSWORD="@+"
 DB_DATABASE="eventos"
-DB_DRIVER="mysqli"
-COMPRIMIR=0 
+DB_DRIVER="mysqliiii"
+COMPRIMIR=0   
