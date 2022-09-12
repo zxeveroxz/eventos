@@ -34,7 +34,13 @@
 						<a class="nav-link" href="<?= base_url("$ORG/usuarios"); ?>"> Usuarios </a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="<?= base_url("$ORG/expositores"); ?>"> Expositores </a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="<?= base_url("$ORG/eventos"); ?>"> Eventos </a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<?= base_url("$ORG/eventos_aperturas"); ?>"> Eventos - Aperturas</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="pages/samples/login.html"> Login </a>

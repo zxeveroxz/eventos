@@ -24,7 +24,7 @@
 				<div class="col-md-4 login-sec">
 					<h2 class="text-center">IDENTIFICACION</h2>
 
-					<?= form_open(base_url("$ORG/usuarios/validar"), ['class' => 'login-form"', 'id' => 'login', 'method' => 'POST']); ?>
+					<?= form_open(base_url("$ORG/usuarios/validar"), ['class' => 'login-form', 'id' => 'login', 'method' => 'POST']); ?>
 					<div class="form-group">
 						<label for="exampleInputEmail1" class="text-uppercase">Usuario</label>
 						<input type="text" class="form-control" placeholder="" name="usu" value="<?= set_value('usu', "") ?>">

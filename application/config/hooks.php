@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+use Dotenv\Dotenv;
 /*
 | -------------------------------------------------------------------------
 | Hooks
@@ -11,8 +11,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |	https://codeigniter.com/userguide3/general/hooks.html
 |
 */
-
-use Dotenv\Dotenv;
 
 # Load phpdotenv
 $hook['pre_system'] = function () {

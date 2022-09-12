@@ -1,17 +1,17 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Participantes extends CI_Controller {
+class Expositores extends CI_Controller {
 
-   
+
 	public $ORG = NULL;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->ORG =  strtoupper($this->uri->segments[1]);
 
-		$this->load->model('Participantes_model','PAR',true);		
-		$this->PAR->CODIGO=$this->ORG;
+		$this->load->model('Expositores_model','EXP',true);		
+		$this->EXP->CODIGO=$this->ORG;
 
 		$this->load->model('Usuarios_model','USU',true);		
 		$this->USU->CODIGO=$this->ORG;
@@ -27,18 +27,18 @@ class Participantes extends CI_Controller {
 		$data["TOP"] = $this->load->view('panel/top', $data, true);
 		$data["NAV"] = $this->load->view('panel/nav', $data, true);
 		$data["SIDEBAR"] = $this->load->view('panel/sidebar', $data, true);
-		$data["CONTENT"] = $this->load->view('participantes/content', $data, true);
+		$data["CONTENT"] = $this->load->view('expositores/content', $data, true);
 		$data["FOOTER"] = $this->load->view('panel/footer', $data, true);
-		echo $this->load->view('panel/index', $data, true);
+		$this->load->view('panel/index', $data);
 	}
 
 	public function get($idx = null, $return = false)
 	{
 		$data = [];
 		if ($idx == null)
-			$resp = $this->PAR->getAll();
+			$resp = $this->EXP->getAll();
 		else {
-			$resp = $this->PAR->get($idx);
+			$resp = $this->EXP->get($idx);
 		}
 		if ($return == true)
 			return json_encode($resp);
@@ -55,7 +55,7 @@ class Participantes extends CI_Controller {
 		$data["ORG"] = $this->ORG;
 		$data["PAR"] = $this->get($idx, true);
 		$data["TOP"] = $this->load->view('panel/top', $data, true);
-		$this->load->view('participantes/form', $data);
+		$this->load->view('expositores/form', $data);
 		//sleep(2);
 	}
 
@@ -67,14 +67,13 @@ class Participantes extends CI_Controller {
 		$RESP['TOKEN_HASH'] = $this->security->get_csrf_hash();
 
 		if ($_POST["idx"] == "" || $_POST["idx"] == 0) {
-			$RESP["RESP"] = $this->PAR->crear($_POST);
+			$RESP["RESP"] = $this->EXP->crear($_POST);
 		} else {			
-			$RESP["RESP"] = $this->PAR->save($_POST);
+			$RESP["RESP"] = $this->EXP->save($_POST);
 		}
 
 		echo json_encode($RESP);
 	}
-
 }
 
-/* End of file Participantes.php and path \application\controllers\Participantes.php */
+/* End of file Expositores.php and path \application\controllers\Expositores.php */

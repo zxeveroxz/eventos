@@ -59,12 +59,13 @@
             /* Firefox */
         }
 
-        .form-group {
-            margin-bottom: 0.7rem
+       
+        .form-group{
+            line-height: 1.0rem;
         }
-
         .form-group label {
-            margin-bottom: 0px;
+            margin-bottom: 2px;
+            color: grey;
         }
         .card .card-body{
             padding: 1.5rem 1.5rem 1.0rem;

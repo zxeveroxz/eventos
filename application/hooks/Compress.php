@@ -22,10 +22,10 @@ function compress()
 
 
    if (getenv('COMPRIMIR') == 1) {
-      $buffer = preg_replace($search, $replace, $buffer);
-      $CI->output->set_output($buffer);
-      $CI->output->_display();
-   }
 
+      $buffer = preg_replace($search, $replace, $buffer);
+   }
+   $CI->output->set_output($buffer);
+   $CI->output->_display();
 }
 /* End of file compress.php */

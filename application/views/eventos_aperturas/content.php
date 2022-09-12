@@ -6,7 +6,7 @@
 	<div class="row ">
 		<div class="col-12">
 			<div class="page-header bg-white py-1 px-2 border-bottom border-dark ">
-				<h3 class="page-title">PARTICIPANTES</h3>
+				<h3 class="page-title">EVENTOS APERTURAS</h3>
 				<ul class="quick-links ml-auto ">
 					<li style="border: none;"><button class="btn btn-primary" id="agregar">Agregar</button></li>
 					<li><button class="btn btn-info" id="actualizar"><i class="fa fa-refresh" aria-hidden="true"></i></button></li>
@@ -16,7 +16,7 @@
 		<div class="col-md-12 ">
 			<div class="card">
 				<div class="card-body">
-					<table id="table" class="table-striped" data-toggle="table" data-url="<?= base_url("$ORG/participantes/get") ?>" data-height="450">
+					<table id="table" class="table-striped" data-toggle="table" data-url="<?= base_url("$ORG/eventos_aperturas/get") ?>" data-height="450">
 						<thead>
 							<tr>
 								<th data-field="idx" data-formatter="operateFormatter" data-events="operateEvents" data-halign="center" data-align="center" data-width="35">-</th>
@@ -71,7 +71,7 @@
 				.removeData('bs.modal')
 				.modal('show')
 				.find('.modal-body')
-				.html('<iframe src="<?= base_url("$ORG/participantes/form/") ?>' + row.idx + '" style="border:none" id="info" height="70px" width="100%"></iframe>');
+				.html('<iframe src="<?= base_url("$ORG/eventos_aperturas/form/") ?>' + row.idx + '" style="border:none" id="info" height="70px" width="100%"></iframe>');
 		}
 	};
 
@@ -85,7 +85,7 @@
 			.removeData('bs.modal')
 			.modal('show')
 			.find('.modal-body')
-			.html('<iframe src="<?= base_url("$ORG/participantes/form/0") ?>" style="border:none" id="info" height="70px" width="100%"></iframe>');
+			.html('<iframe src="<?= base_url("$ORG/eventos_aperturas/form/0") ?>" style="border:none" id="info" height="70px" width="100%"></iframe>');
 	});
 
 	$("#actualizar").on("click", function() {
