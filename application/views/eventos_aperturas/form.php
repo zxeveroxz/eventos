@@ -14,27 +14,28 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                       
-                            <label for="evento">Listado de Evento</label>
-                            <select class="form-control formy" id="evento">
-                                <?php
-                                foreach ($EVE as $e)
-                                    echo "<option value='$e->idx'>$e->nombre</option>\n";
-                                ?>
-                            </select>
-                     
+
+                        <label for="evento">Listado de Evento</label>
+                        <select class="form-control formy" id="evento">
+                            <option value='-'>Seleccione</option>
+                            <?php
+                            foreach ($EVE as $e)
+                                echo "<option value='$e->idx'>$e->nombre</option>\n";
+                            ?>
+                        </select>
+                        <input type="hidden" class="formy" id="evento_nombre" >
                     </div>
                     <div class="form-group col-md-2">
-                        
-                            <label for="turno">Turno</label>
-                            <select class="form-control formy" id="turno">
-                                <?php
-                                $TURNO = ['I', 'II', 'III', 'IV', 'V', 'VI'];
-                                foreach ($TURNO as $t)
-                                    echo "<option value='$t'>$t</option>\n";
-                                ?>
-                            </select>
-                      
+
+                        <label for="turno">Turno</label>
+                        <select class="form-control formy" id="turno">
+                            <?php
+                            $TURNO = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+                            foreach ($TURNO as $t)
+                                echo "<option value='$t'>$t</option>\n";
+                            ?>
+                        </select>
+
                     </div>
                     <div class="form-group col-md-1 col-6">
                         <div class="text-center">
@@ -46,10 +47,10 @@
                         </div>
                     </div>
                     <div class="form-group col-md-3 col-6">
-                        
-                            <label for="usuario">Fecha</label>
-                            <input type="text" class="form-control " disabled="true" id="fecha">
-                       
+
+                        <label for="usuario">Fecha</label>
+                        <input type="text" class="form-control " disabled="true" id="fecha">
+
                     </div>
                 </div>
 
@@ -58,11 +59,13 @@
                     <div class="form-group col-md-6">
                         <label for="expositor">Expositor</label>
                         <select class="form-control formy" id="expositor">
+                            <option value='-'>Seleccione</option>
                             <?php
                             foreach ($EXP as $e)
                                 echo "<option value='$e->idx'>$e->pat $e->mat $e->nombres</option>\n";
                             ?>
                         </select>
+                        <input type="hidden" class="formy" id="expositor5_nombre" >
                     </div>
                     <div class="form-group col-md-3">
                         <label for="fec_ini">Fecha Inicio</label>
@@ -80,8 +83,8 @@
                         <input type="number" class="form-control formy" id="matricula">
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="materiales">Materriales </label>
-                        <input type="number" class="form-control formy" id="materiales">
+                        <label for="material">Material </label>
+                        <input type="number" class="form-control formy" id="material">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="cuota_numeros">Numero Cuotas </label>
@@ -103,7 +106,7 @@
                     </div>
                     <div class="form-group col-md-2 text-center">
                         <label for="finalizado">Finalizado</label>
-                        <div class="custom-control custom-switch">
+                        <div class="custom-control custom-switch ">
                             <input type="checkbox" class="custom-control-input formy" id="finalizado" value="">
                             <label class="custom-control-label" for="finalizado"></label>
                         </div>
@@ -131,12 +134,19 @@
             $("#idx").val(row.idx);
 
             $("#evento").val(row.evento);
-            $("#fijo").val(row.fijo);
-            $("#telefono").val(row.telefono);
-            $("#telefono2").val(row.telefono2);
+            $("#evento_nombre").val(row.evento_nombre);
+            $("#turno").val(row.turno);
+            $("#expositor").val(row.expositor);
+            $("#expositor_nombre").val(row.expositor_nombre);
+            $("#fec_ini").val(row.fec_ini);
+            $("#lecciones").val(row.lecciones);
+            $("#matricula").val(row.matricula);
+            $("#material").val(row.material);
+            $("#cuota_numeros").val(row.cuota_numeros);
+            $("#cuota").val(row.cuota);
+            $("#cuota_modo").val(row.cuota_modo);
+            $("#finalizado").prop("checked", row.finalizado != 0 ? true : false);
 
-            $("#direccion").val(row.direccion);
-            $("#localidad").val(row.localidad);
             $("#fecha").val(row.fecha);
             $("#estado").prop("checked", row.estado != 0 ? true : false);
 
@@ -205,56 +215,12 @@
                 e.preventDefault();
             });
 
-            fetch("<?= base_url("$ORG/ubigeo/dep") ?>")
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    data.map((c) => {
-                        $dep.append(`<option value="${c.dep}">${c.dep}</option>`);
-                    });
-                });
-
             /*cambiar el tamaño del modal */
             parent.$(".lloader").remove();
             let principal = $("#principal");
             principal.removeClass('fade');
             parent.$("#info").attr('height', principal.height() + 10);
 
-        });
-
-        $dep.change(async function() {
-            $pro.empty();
-            $pro.append(`<option value="">Cargando...</option>`);
-            await fetch("<?= base_url("$ORG/ubigeo/pro") ?>/" + $dep.val())
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    $pro.empty();
-                    data.map((c) => {
-                        $pro.append(`<option value="${c.pro}">${c.pro}</option>`);
-                    });
-                    $dis.empty();
-                    $dis.append(`<option value="-">-</option>`);
-                });
-            $pro.change();
-            $("#dep option:first").attr("disabled", true);
-        });
-
-        $pro.change(function() {
-            $dis.empty();
-            $dis.append(`<option value="">Cargando...</option>`);
-            fetch("<?= base_url("$ORG/ubigeo/dis") ?>/" + $dep.val() + "/" + $pro.val())
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    $dis.empty();
-                    data.map((c) => {
-                        $dis.append(`<option value="${c.dis}">${c.dis}</option>`);
-                    });
-                });
         });
     </script>
 
