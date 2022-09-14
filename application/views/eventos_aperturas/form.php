@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="fec_ini">Fecha Inicio</label>
-                        <input type="text" class="form-control formy " id="fec_ini" required>
+                        <input type="date" class="form-control formy " id="fec_ini" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="lecciones">Lecciones</label>
@@ -140,6 +140,7 @@
             $("#turno").val(row.turno);
             $("#expositor").val(row.expositor);
             $("#expositor_nombre").val(row.expositor_nombre);
+            /* $("#fec_ini").val(row.fec_ini).datepicker("update", new Date($("#fec_ini").val()));*/
             $("#fec_ini").val(row.fec_ini);
             $("#lecciones").val(row.lecciones);
             $("#matricula").val(row.matricula);
@@ -154,7 +155,7 @@
             $("#estado").prop("checked", row.estado != 0 ? true : false);
         };
 
-        llenar(<?= ($EVA) ?>);
+
 
 
 
@@ -224,6 +225,8 @@
             parent.toast(contenido, tipo, tiempo);
         };
 
+
+
         $(document).ready(function() {
             $("#formy").submit((e) => {
                 e.preventDefault();
@@ -235,10 +238,26 @@
             principal.removeClass('fade');
             parent.$("#info").attr('height', principal.height() + 10);
 
-            $('#fec_ini').datetimepicker({
-                /* "allowInputToggle": true,*/
-                "format": "DD/MM/YYYY"
+/*
+
+            $('#fec_ini').datepicker({
+                format: {
+                    toDisplay: function(date, format, language) {
+                        var d = new Date(date);                       
+                        return d.toISOString();
+                    },
+                    toValue: function(date, format, language) {
+                        var d = new Date(date);
+                        d.setDate(d.getDate());
+                        return new Date(d);
+                    }
+                },
+                language: "es",
+                autoclose: true,
+                todayHighlight: true
             });
+*/
+            llenar(<?= ($EVA) ?>);
 
         });
     </script>
@@ -246,7 +265,14 @@
     <style>
         .datepicker,
         .table-condensed {
-            font-size: x-small;
+            font-size: small
+        }
+
+        .bootstrap-datetimepicker-widget table td.day,
+        .month,
+        .year {
+            line-height: 9px;
+            height: 9px;
         }
     </style>
 </body>

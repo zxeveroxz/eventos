@@ -48,7 +48,6 @@ class Eventos_aperturas extends CI_Controller {
 
 	public function form($idx)
 	{
-
 		$data = [];
 		$data["ORG"] = $this->ORG;
         $data["EVE"] = $this->EVE->getAll();
@@ -66,7 +65,6 @@ class Eventos_aperturas extends CI_Controller {
 		$RESP["TOKEN_NAME"] = $this->security->get_csrf_token_name();
 		$RESP['TOKEN_HASH'] = $this->security->get_csrf_hash();
 
-
 		if ($_POST["idx"] == "" || $_POST["idx"] == 0) {
 			$RESP["RESP"] = $this->EVA->crear($_POST);
 		} else {			
@@ -75,8 +73,6 @@ class Eventos_aperturas extends CI_Controller {
 
 		echo json_encode($RESP);
 	}
-
-
 }
 
 /* End of file Eventos_aperturas.php and path \application\controllers\Eventos_aperturas.php */

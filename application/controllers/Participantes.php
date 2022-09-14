@@ -46,7 +46,6 @@ class Participantes extends CI_Controller {
 
 	public function form($idx)
 	{		
-		echo "hi";
 		if($idx==0){
 			//$this->output->cache(3);
 		}

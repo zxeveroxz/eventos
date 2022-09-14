@@ -42,8 +42,8 @@
 
     <!-- datetimepicker -->
     <script src="/eventos/public/bt4/js/moment-with-locales.min.js"></script>
-    <script src="/eventos/public/bt4/js/bootstrap-datetimepicker.min.js"></script>
-    <link rel="stylesheet" href="/eventos/public/bt4/css/bootstrap-datetimepicker.min.css">
+    <script src="/eventos/public/bt4/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="/eventos/public/bt4/css/bootstrap-datepicker.min.css">
 
     <style>
         .invalid-tooltip {
@@ -135,6 +135,8 @@
                 position: "bottom-center"
             });
         }
+
+        /*d.toLocaleDateString('en-GB'); fecha en español */
     </script>
 </head>
 <div id="loading"></div>
