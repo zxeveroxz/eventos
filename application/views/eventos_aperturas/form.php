@@ -65,7 +65,7 @@
                                 echo "<option value='$e->idx'>$e->pat $e->mat $e->nombres</option>\n";
                             ?>
                         </select>
-                        <input type="hidden" class="formy" id="expositor5_nombre" >
+                        <input type="hidden" class="formy" id="expositor_nombre" >
                     </div>
                     <div class="form-group col-md-3">
                         <label for="fec_ini">Fecha Inicio</label>
@@ -140,7 +140,8 @@
             $("#expositor_nombre").val(row.expositor_nombre);
             $("#fec_ini").val(row.fec_ini);
             $("#lecciones").val(row.lecciones);
-            $("#matricula").val(row.matricula);
+            $("#matricula").val(parseFloat(row.matricula));
+            
             $("#material").val(row.material);
             $("#cuota_numeros").val(row.cuota_numeros);
             $("#cuota").val(row.cuota);
@@ -149,7 +150,6 @@
 
             $("#fecha").val(row.fecha);
             $("#estado").prop("checked", row.estado != 0 ? true : false);
-
         };
 
         llenar(<?= ($EVA) ?>);
@@ -161,6 +161,9 @@
         };
 
         let formDATOS = () => {
+            $("#evento_nombre").val($("#evento option:selected").text());
+            $("#expositor_nombre").val($("#expositor option:selected").text());
+
             let formData = new FormData();
             $(".formy, input[type='hidden'] ").each((i, v) => {
                 $input = $(v);

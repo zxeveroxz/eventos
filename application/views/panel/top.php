@@ -37,7 +37,8 @@
     <link rel="stylesheet" href="/eventos/public/bt4/css/toast.min.css">
     <script src="/eventos/public/bt4/js/toast.min.js"></script>
 
-
+    <!-- number jquery -->
+    <script src="/eventos/public/jquery.number.min.js"></script> 
 
     <style>
         .form-control {
