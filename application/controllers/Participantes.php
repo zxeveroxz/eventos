@@ -2,7 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Participantes extends CI_Controller {
-
    
 	public $ORG = NULL;
 	public function __construct()
@@ -15,8 +14,7 @@ class Participantes extends CI_Controller {
 
 		$this->load->model('Usuarios_model','USU',true);		
 		$this->USU->CODIGO=$this->ORG;
-		//$this->participantes_model->CODIGO="....";
-		
+		//$this->participantes_model->CODIGO="....";		
 	}
 
 	public function index()
@@ -29,7 +27,7 @@ class Participantes extends CI_Controller {
 		$data["SIDEBAR"] = $this->load->view('panel/sidebar', $data, true);
 		$data["CONTENT"] = $this->load->view('participantes/content', $data, true);
 		$data["FOOTER"] = $this->load->view('panel/footer', $data, true);
-		echo $this->load->view('panel/index', $data, true);
+		$this->load->view('panel/index', $data);
 	}
 
 	public function get($idx = null, $return = false)
@@ -48,6 +46,7 @@ class Participantes extends CI_Controller {
 
 	public function form($idx)
 	{		
+		echo "hi";
 		if($idx==0){
 			//$this->output->cache(3);
 		}
