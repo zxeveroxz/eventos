@@ -38,9 +38,21 @@
     <script src="/eventos/public/bt4/js/toast.min.js"></script>
 
     <!-- number jquery -->
-    <script src="/eventos/public/jquery.number.min.js"></script> 
+    <script src="/eventos/public/jquery.number.min.js"></script>
+
+    <!-- datetimepicker -->
+    <script src="/eventos/public/bt4/js/moment-with-locales.min.js"></script>
+    <script src="/eventos/public/bt4/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="/eventos/public/bt4/css/bootstrap-datetimepicker.min.css">
 
     <style>
+        .invalid-tooltip {
+            font-size: 00.5rem;
+            padding: 3px;
+            margin-left: 00.5rem;
+            margin-top: -0.5rem;
+        }
+
         .form-control {
             font-weight: bold;
             letter-spacing: 0.4px;
@@ -60,22 +72,24 @@
             /* Firefox */
         }
 
-       
-        .form-group{
+
+        .form-group {
             line-height: 1.0rem;
         }
+
         .form-group label {
             margin-bottom: 2px;
             color: grey;
         }
-        .card .card-body{
+
+        .card .card-body {
             padding: 1.5rem 1.5rem 1.0rem;
         }
 
-        .modal-body{
+        .modal-body {
             padding-bottom: 0.5rem;
         }
-     
+
 
         #loading {
             position: fixed;

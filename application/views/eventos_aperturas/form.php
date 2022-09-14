@@ -13,17 +13,20 @@
                 <input type="hidden" id="idx" value="0">
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ">
 
                         <label for="evento">Listado de Evento</label>
-                        <select class="form-control formy" id="evento">
-                            <option value='-'>Seleccione</option>
+
+                        <select class="form-control formy" id="evento" required>
+                            <option value=''>Seleccione...</option>
                             <?php
                             foreach ($EVE as $e)
                                 echo "<option value='$e->idx'>$e->nombre</option>\n";
                             ?>
                         </select>
-                        <input type="hidden" class="formy" id="evento_nombre" >
+                        <input type="hidden" class="formy" id="evento_nombre">
+
+
                     </div>
                     <div class="form-group col-md-2">
 
@@ -47,29 +50,26 @@
                         </div>
                     </div>
                     <div class="form-group col-md-3 col-6">
-
                         <label for="usuario">Fecha</label>
                         <input type="text" class="form-control " disabled="true" id="fecha">
-
                     </div>
                 </div>
 
-
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ">
                         <label for="expositor">Expositor</label>
-                        <select class="form-control formy" id="expositor">
-                            <option value='-'>Seleccione</option>
+                        <select class="form-control formy " id="expositor" required>
+                            <option value=''>Seleccione...</option>
                             <?php
                             foreach ($EXP as $e)
                                 echo "<option value='$e->idx'>$e->pat $e->mat $e->nombres</option>\n";
                             ?>
                         </select>
-                        <input type="hidden" class="formy" id="expositor_nombre" >
+                        <input type="hidden" class="formy" id="expositor_nombre">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="fec_ini">Fecha Inicio</label>
-                        <input type="text" class="form-control formy" id="fec_ini">
+                        <input type="text" class="form-control formy " id="fec_ini" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="lecciones">Lecciones</label>
@@ -80,19 +80,19 @@
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label for="matricula">C. Matricula </label>
-                        <input type="number" class="form-control formy" id="matricula">
+                        <input type="number" class="form-control formy" id="matricula" step="any">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="material">Material </label>
-                        <input type="number" class="form-control formy" id="material">
+                        <input type="number" class="form-control formy" id="material" step="any">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="cuota_numeros">Numero Cuotas </label>
-                        <input type="number" class="form-control formy" id="cuota_numeros">
+                        <input type="number" class="form-control formy" id="cuota_numeros" step="any">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="cuota">Valor Cuota </label>
-                        <input type="number" class="form-control formy" id="cuota">
+                        <input type="number" class="form-control formy" id="cuota" step="any">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="cuota_modo">Modalidad </label>
@@ -113,8 +113,7 @@
                     </div>
                 </div>
 
-
-
+                <hr />
                 <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir();">Guardar</button>
                 <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar();">Cancelar/Cerrar</button>
                 <?= form_close() ?>
@@ -123,6 +122,9 @@
         </div>
     </div>
     <script>
+        var numberFormat = new Intl.NumberFormat('de-DE', {
+            minimumFractionDigits: 2
+        });
         let btn_submit = $("#submit");
         let llenar = async (row) => {
             $("#id").html("NUEVO");
@@ -140,8 +142,8 @@
             $("#expositor_nombre").val(row.expositor_nombre);
             $("#fec_ini").val(row.fec_ini);
             $("#lecciones").val(row.lecciones);
-            $("#matricula").val(parseFloat(row.matricula));
-            
+            $("#matricula").val(row.matricula);
+
             $("#material").val(row.material);
             $("#cuota_numeros").val(row.cuota_numeros);
             $("#cuota").val(row.cuota);
@@ -161,6 +163,7 @@
         };
 
         let formDATOS = () => {
+
             $("#evento_nombre").val($("#evento option:selected").text());
             $("#expositor_nombre").val($("#expositor option:selected").text());
 
@@ -178,6 +181,14 @@
         };
 
         let emitir = async () => {
+
+            let formy = document.getElementById("formy");
+            formy.classList.remove('was-validated');
+            if (formy.checkValidity() === false) {
+                formy.classList.add('was-validated');
+                return false;
+            }
+
             btn_submit.attr("disabled", true).html("Procesando....");
             await fetch($("#formy").attr("action"), {
                     method: 'POST',
@@ -224,8 +235,18 @@
             principal.removeClass('fade');
             parent.$("#info").attr('height', principal.height() + 10);
 
+            $('#fec_ini').datetimepicker({
+                /* "allowInputToggle": true,*/
+                "format": "DD/MM/YYYY"
+            });
+
         });
     </script>
 
-
+    <style>
+        .datepicker,
+        .table-condensed {
+            font-size: x-small;
+        }
+    </style>
 </body>
