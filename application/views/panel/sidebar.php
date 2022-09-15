@@ -16,7 +16,7 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="<?= base_url("$ORG/participantes"); ?>">
+			<a class="nav-link" href="<?= base_url("$ORG/matriculas"); ?>">
 				<i class="menu-icon typcn typcn-th-large-outline"></i>
 				<span class="menu-title">Matriculas</span>
 			</a>

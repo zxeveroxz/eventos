@@ -112,7 +112,7 @@
                     valor = $input.is(":checked") ? 1 : 0;
                 }
                 formData.append($input.attr('id'), valor);
-                //console.log($input.attr('id'), valor);
+                /* console.log($input.attr('id'), valor); */
             });
             return formData;
         }
@@ -121,11 +121,11 @@
             btn_submit.attr("disabled",true).html("Procesando....");
             await fetch($("#formy").attr("action"), {
                     method: 'POST',
-                    body: await formDATOS()
+                    body: await formDATOS();
                 })
                 .then((response) => {
                     if (response.status != 200) {
-                        alert("Se produjo el siguiente error: " + response.statusText)
+                        alert("Se produjo el siguiente error: " + response.statusText);
                         cancelar();
                         return false;
                     } else
@@ -161,7 +161,7 @@
            });
             
 
-            //cambiar el tamaño del modal 
+            /*cambiar el tamaño del modal */ 
             parent.$(".lloader").remove();
             let principal = $("#principal");
             principal.removeClass('fade')

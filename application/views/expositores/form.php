@@ -113,19 +113,11 @@
             $("#fijo").val(row.fijo);
             $("#telefono").val(row.telefono);
             $("#telefono2").val(row.telefono2);
-            await $("#dep").prepend(`<option value="${row.dep}" selected>${row.dep}</option>`);
-            await $("#pro").prepend(`<option value="${row.pro}" selected>${row.pro}</option>`);
-            await $("#dis").prepend(`<option value="${row.dis}" selected>${row.dis}</option>`);
-            $("#direccion").val(row.direccion);
-            $("#localidad").val(row.localidad);
             $("#fecha").val(row.fecha);
             $("#estado").prop("checked", row.estado != 0 ? true : false);
-
         };
 
         llenar(<?= ($PAR) ?>);
-
-
 
         let cancelar = () => {
             window.parent.closeModal();
@@ -186,16 +178,6 @@
                 e.preventDefault();
             });
 
-            fetch("<?= base_url("$ORG/ubigeo/dep") ?>")
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    data.map((c) => {
-                        $dep.append(`<option value="${c.dep}">${c.dep}</option>`);
-                    });
-                });
-
             /*cambiar el tamaño del modal */
             parent.$(".lloader").remove();
             let principal = $("#principal");
@@ -204,39 +186,9 @@
 
         });
 
-        $dep.change(async function() {
-            $pro.empty();
-            $pro.append(`<option value="">Cargando...</option>`);
-            await fetch("<?= base_url("$ORG/ubigeo/pro") ?>/" + $dep.val())
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    $pro.empty();
-                    data.map((c) => {
-                        $pro.append(`<option value="${c.pro}">${c.pro}</option>`);
-                    });
-                    $dis.empty();
-                    $dis.append(`<option value="-">-</option>`);
-                });
-            $pro.change();
-            $("#dep option:first").attr("disabled", true);
-        });
+  
 
-        $pro.change(function() {
-            $dis.empty();
-            $dis.append(`<option value="">Cargando...</option>`);
-            fetch("<?= base_url("$ORG/ubigeo/dis") ?>/" + $dep.val() + "/" + $pro.val())
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    $dis.empty();
-                    data.map((c) => {
-                        $dis.append(`<option value="${c.dis}">${c.dis}</option>`);
-                    });
-                });
-        });
+        
     </script>
 
 

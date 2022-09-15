@@ -24,7 +24,8 @@
                                     <option value="otro">OTRO</option>
                                 </select>
                                 <input type="text" class="form-control formy" id="nro_doc" style="width: 50%">
-                                <button id="consultar" type="button" class="btn btn-info" style="width: 25%"><span class="d-none d-sm-block">Consultar</span></button>
+                                <button id="consultar" type="button" class="btn btn-info" style="width: 25%"><span
+                                        class="d-none d-sm-block">Consultar</span></button>
                             </div>
                         </div>
                     </div>
@@ -115,160 +116,162 @@
                     </div>
                 </div>
 
-                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir();">Guardar</button>
-                <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar();">Cancelar/Cerrar</button>
+                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 "
+                    onclick="emitir();">Guardar</button>
+                <button type="button" class="btn btn-md btn-danger float-right"
+                    onclick="cancelar();">Cancelar/Cerrar</button>
                 <?= form_close() ?>
 
             </div>
         </div>
     </div>
     <script>
-        var $dep = $("#dep");
-        var $pro = $("#pro");
-        var $dis = $("#dis");
-        let btn_submit = $("#submit");
+    var $dep = $("#dep");
+    var $pro = $("#pro");
+    var $dis = $("#dis");
+    let btn_submit = $("#submit");
 
-        let llenar = async (row) => {
-            $("#id").html("NUEVO");
-            $("#fecha").val(new Date().toLocaleString());
-            if (row == null) return;
+    let llenar = async (row) => {
+        $("#id").html("NUEVO");
+        $("#fecha").val(new Date().toLocaleString());
+        if (row == null) return;
 
-            $("#id").html("EDITAR: " + row.idx);
-            $("#submit").html("Actualizar");
-            $("#idx").val(row.idx);
-            $("#tip_doc").val(row.tip_doc);
-            $("#nro_doc").val(row.nro_doc);
-            $("#pat").val(row.pat);
-            $("#mat").val(row.mat);
-            $("#nombres").val(row.nombres);
-            $("#correo").val(row.correo);
-            $("#fijo").val(row.fijo);
-            $("#telefono").val(row.telefono);
-            $("#telefono2").val(row.telefono2);
-            await $("#dep").prepend(`<option value="${row.dep}" selected>${row.dep}</option>`);
-            await $("#pro").prepend(`<option value="${row.pro}" selected>${row.pro}</option>`);
-            await $("#dis").prepend(`<option value="${row.dis}" selected>${row.dis}</option>`);
-            $("#direccion").val(row.direccion);
-            $("#localidad").val(row.localidad);
-            $("#fecha").val(row.fecha);
-            $("#estado").prop("checked", row.estado != 0 ? true : false);
+        $("#id").html("EDITAR: " + row.idx);
+        $("#submit").html("Actualizar");
+        $("#idx").val(row.idx);
+        $("#tip_doc").val(row.tip_doc);
+        $("#nro_doc").val(row.nro_doc);
+        $("#pat").val(row.pat);
+        $("#mat").val(row.mat);
+        $("#nombres").val(row.nombres);
+        $("#correo").val(row.correo);
+        $("#fijo").val(row.fijo);
+        $("#telefono").val(row.telefono);
+        $("#telefono2").val(row.telefono2);
+        await $("#dep").prepend(`<option value="${row.dep}" selected>${row.dep}</option>`);
+        await $("#pro").prepend(`<option value="${row.pro}" selected>${row.pro}</option>`);
+        await $("#dis").prepend(`<option value="${row.dis}" selected>${row.dis}</option>`);
+        $("#direccion").val(row.direccion);
+        $("#localidad").val(row.localidad);
+        $("#fecha").val(row.fecha);
+        $("#estado").prop("checked", row.estado != 0 ? true : false);
 
-        };
+    };
 
-        llenar(<?= ($PAR) ?>);
+    llenar(<?= ($PAR) ?>);
 
 
 
-        let cancelar = () => {
-            window.parent.closeModal();
-        };
+    let cancelar = () => {
+        window.parent.closeModal();
+    };
 
-        let formDATOS = () => {
-            let formData = new FormData();
-            $(".formy, input[type='hidden'] ").each((i, v) => {
-                $input = $(v);
-                let valor = $input.hasClass('numero') ? $input.val().replace(/,/g, '') : $input.val();
-                if ($input.attr('type') == 'checkbox') {
-                    valor = $input.is(":checked") ? 1 : 0;
-                }
-                formData.append($input.attr('id'), valor);
-                /*console.log($input.attr('id'), valor);*/
-            });
-            return formData;
-        };
+    let formDATOS = () => {
+        let formData = new FormData();
+        $(".formy, input[type='hidden'] ").each((i, v) => {
+            $input = $(v);
+            let valor = $input.hasClass('numero') ? $input.val().replace(/,/g, '') : $input.val();
+            if ($input.attr('type') == 'checkbox') {
+                valor = $input.is(":checked") ? 1 : 0;
+            }
+            formData.append($input.attr('id'), valor);
+            /*console.log($input.attr('id'), valor);*/
+        });
+        return formData;
+    };
 
-        let emitir = async () => {
-            btn_submit.attr("disabled", true).html("Procesando....");
-            await fetch($("#formy").attr("action"), {
-                    method: 'POST',
-                    body: await formDATOS()
-                })
-                .then((response) => {
-                    if (response.status != 200) {
-                        alert("Se produjo el siguiente error: " + response.statusText);
+    let emitir = async () => {
+        btn_submit.attr("disabled", true).html("Procesando....");
+        await fetch($("#formy").attr("action"), {
+                method: 'POST',
+                body: await formDATOS()
+            })
+            .then((response) => {
+                if (response.status != 200) {
+                    alert("Se produjo el siguiente error: " + response.statusText);
+                    cancelar();
+                    return false;
+                } else
+                    return response.json();
+            })
+            .then((data) => {
+                if (data.RESP > 0) {
+                    toast("Operacion realizada con exito");
+                    if ($("#idx").val() == 0) {
                         cancelar();
-                        return false;
-                    } else
-                        return response.json();
-                })
-                .then((data) => {
-                    if (data.RESP > 0) {
-                        toast("Operacion realizada con exito");
-                        if ($("#idx").val() == 0) {
-                            cancelar();
-                        }
-                    } else
-                        toast("Error: No se realizo ningun cambio<hr>" + data.RESP, "error");
-                    $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
-                    btn_submit.attr("disabled", false).html("Guardar");
+                    }
+                } else
+                    toast("Error: No se realizo ningun cambio<hr>" + data.RESP, "error");
+                $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+                btn_submit.attr("disabled", false).html("Guardar");
 
-                })
-                .catch((e) => {
-                    console.log('catch', e);
+            })
+            .catch((e) => {
+                console.log('catch', e);
 
+            });
+    };
+
+    const toast = (contenido, tipo = "ok", tiempo = 3000) => {
+        parent.toast(contenido, tipo, tiempo);
+    };
+
+    $(document).ready(function() {
+        $("#formy").submit((e) => {
+            e.preventDefault();
+        });
+
+        fetch("<?= base_url("$ORG/ubigeo/dep") ?>")
+            .then(async r => {
+                return await r.json();
+            })
+            .then(data => {
+                data.map((c) => {
+                    $dep.append(`<option value="${c.dep}">${c.dep}</option>`);
                 });
-        };
-
-        const toast = (contenido, tipo = "ok", tiempo = 3000) => {
-            parent.toast(contenido, tipo, tiempo);
-        };
-
-        $(document).ready(function() {
-            $("#formy").submit((e) => {
-                e.preventDefault();
             });
 
-            fetch("<?= base_url("$ORG/ubigeo/dep") ?>")
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    data.map((c) => {
-                        $dep.append(`<option value="${c.dep}">${c.dep}</option>`);
-                    });
+        /*cambiar el tamaño del modal */
+        parent.$(".lloader").remove();
+        let principal = $("#principal");
+        principal.removeClass('fade');
+        parent.$("#info").attr('height', principal.height() + 10);
+
+    });
+
+    $dep.change(async function() {
+        $pro.empty();
+        $pro.append(`<option value="">Cargando...</option>`);
+        await fetch("<?= base_url("$ORG/ubigeo/pro") ?>/" + $dep.val())
+            .then(async r => {
+                return await r.json();
+            })
+            .then(data => {
+                $pro.empty();
+                data.map((c) => {
+                    $pro.append(`<option value="${c.pro}">${c.pro}</option>`);
                 });
+                $dis.empty();
+                $dis.append(`<option value="-">-</option>`);
+            });
+        $pro.change();
+        $("#dep option:first").attr("disabled", true);
+    });
 
-            /*cambiar el tamaño del modal */
-            parent.$(".lloader").remove();
-            let principal = $("#principal");
-            principal.removeClass('fade');
-            parent.$("#info").attr('height', principal.height() + 10);
-
-        });
-
-        $dep.change(async function() {
-            $pro.empty();
-            $pro.append(`<option value="">Cargando...</option>`);
-            await fetch("<?= base_url("$ORG/ubigeo/pro") ?>/" + $dep.val())
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    $pro.empty();
-                    data.map((c) => {
-                        $pro.append(`<option value="${c.pro}">${c.pro}</option>`);
-                    });
-                    $dis.empty();
-                    $dis.append(`<option value="-">-</option>`);
+    $pro.change(function() {
+        $dis.empty();
+        $dis.append(`<option value="">Cargando...</option>`);
+        fetch("<?= base_url("$ORG/ubigeo/dis") ?>/" + $dep.val() + "/" + $pro.val())
+            .then(async r => {
+                return await r.json();
+            })
+            .then(data => {
+                $dis.empty();
+                data.map((c) => {
+                    $dis.append(`<option value="${c.dis}">${c.dis}</option>`);
                 });
-            $pro.change();
-            $("#dep option:first").attr("disabled", true);
-        });
-
-        $pro.change(function() {
-            $dis.empty();
-            $dis.append(`<option value="">Cargando...</option>`);
-            fetch("<?= base_url("$ORG/ubigeo/dis") ?>/" + $dep.val() + "/" + $pro.val())
-                .then(async r => {
-                    return await r.json();
-                })
-                .then(data => {
-                    $dis.empty();
-                    data.map((c) => {
-                        $dis.append(`<option value="${c.dis}">${c.dis}</option>`);
-                    });
-                });
-        });
+            });
+    });
     </script>
 
 
