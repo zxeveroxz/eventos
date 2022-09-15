@@ -12,9 +12,39 @@
                 ?>
                 <input type="hidden" id="idx" value="0">
 
-                <div class="form-row">
+                <div class="form-row  mb-2 ">
+                    <div class="form-group col-md-3 ">
+                        <label for="evento">DNI PARTICIPANTE</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group col-md-6 ">
+                        <label for="evento">DATOS PARTICIPANTES</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" readonly="true">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-1 col-6 ">
+                        <div class="text-center">
+                            <label for="estado">Estado</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input formy" checked id="estado" value="">
+                                <label class="custom-control-label" for="estado"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2  col-6">
+                        <label for="usuario">Fecha</label>
+                        <input type="text" class="form-control " disabled="true" id="fecha">
+                    </div>
+                </div>
 
+                <div class="form-row mb-2 ">
+                    <div class="form-group col-md-5 ">
                         <label for="evento">Listado de Evento</label>
 
                         <select class="form-control formy" id="evento" required>
@@ -29,49 +59,16 @@
 
                     </div>
                     <div class="form-group col-md-2">
-
-                        <label for="turno">Turno</label>
-                        <select class="form-control formy" id="turno">
-                            <?php
-                            $TURNO = ['I', 'II', 'III', 'IV', 'V', 'VI'];
-                            foreach ($TURNO as $t)
-                                echo "<option value='$t'>$t</option>\n";
-                            ?>
+                        <label for="turno">Fechas</label>
+                        <select class="form-control formy" id="fechas">
                         </select>
 
                     </div>
-                    <div class="form-group col-md-1 col-6">
-                        <div class="text-center">
-                            <label for="estado">Estado</label>
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input formy" checked id="estado" value="">
-                                <label class="custom-control-label" for="estado"></label>
-                            </div>
-                        </div>
+                    <div class="form-group col-md-5 ">
+                        <label for="evento">Expositor</label>
+                        <input type="text" class="form-control formy" id="expositor" readonly="true">
                     </div>
-                    <div class="form-group col-md-3 col-6">
-                        <label for="usuario">Fecha</label>
-                        <input type="text" class="form-control " disabled="true" id="fecha">
-                    </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6 ">
-                        <label for="expositor">Expositor</label>
-                        <select class="form-control formy " id="expositor" required>
-                            <option value=''>Seleccione...</option>
-                          
-                        </select>
-                        <input type="hidden" class="formy" id="expositor_nombre">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="fec_ini">Fecha Inicio</label>
-                        <input type="date" class="form-control formy " id="fec_ini" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="lecciones">Lecciones</label>
-                        <input type="number" class="form-control formy" id="lecciones">
-                    </div>
                 </div>
 
                 <div class="form-row">
@@ -100,13 +97,6 @@
                                 echo "<option value='$t'>$val</option>\n";
                             ?>
                         </select>
-                    </div>
-                    <div class="form-group col-md-2 text-center">
-                        <label for="finalizado">Finalizado</label>
-                        <div class="custom-control custom-switch ">
-                            <input type="checkbox" class="custom-control-input formy" id="finalizado" value="">
-                            <label class="custom-control-label" for="finalizado"></label>
-                        </div>
                     </div>
                 </div>
 
@@ -235,25 +225,25 @@
             principal.removeClass('fade');
             parent.$("#info").attr('height', principal.height() + 10);
 
-/*
+            /*
 
-            $('#fec_ini').datepicker({
-                format: {
-                    toDisplay: function(date, format, language) {
-                        var d = new Date(date);                       
-                        return d.toISOString();
-                    },
-                    toValue: function(date, format, language) {
-                        var d = new Date(date);
-                        d.setDate(d.getDate());
-                        return new Date(d);
-                    }
-                },
-                language: "es",
-                autoclose: true,
-                todayHighlight: true
-            });
-*/
+                        $('#fec_ini').datepicker({
+                            format: {
+                                toDisplay: function(date, format, language) {
+                                    var d = new Date(date);                       
+                                    return d.toISOString();
+                                },
+                                toValue: function(date, format, language) {
+                                    var d = new Date(date);
+                                    d.setDate(d.getDate());
+                                    return new Date(d);
+                                }
+                            },
+                            language: "es",
+                            autoclose: true,
+                            todayHighlight: true
+                        });
+            */
             llenar(<?= ($MAT) ?>);
 
         });

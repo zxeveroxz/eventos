@@ -62,7 +62,7 @@ class Matriculas extends CI_Controller {
         //$data["EXP"] = $this->EXP->getAll(); //EXPOSITOR MODEL
 		$data["MAT"] = $this->get($idx, true);//EVENTOS APERTURA
 		$data["TOP"] = $this->load->view('panel/top', $data, true);
-		$this->load->view('eventos_aperturas/form', $data);
+		$this->load->view('matriculas/form', $data);
 		//sleep(2);
 	}
 
