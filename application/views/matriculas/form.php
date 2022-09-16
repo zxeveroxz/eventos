@@ -14,11 +14,12 @@
 
                 <div class="form-row  mb-2 ">
                     <div class="form-group col-md-3 ">
-                        <label for="evento">DNI PARTICIPANTE</label>
+                        <label for="evento">DOCUMENTO PARTICIPANTE</label>
                         <div class="input-group">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="documento">
+                            <input type="hidden" id="participante" value="0">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button class="btn btn-primary" type="button" onclick="buscar();"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -98,6 +99,17 @@
                             ?>
                         </select>
                     </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="cuota_modo">Promocion </label>
+                        <select class="form-control formy" id="cuota_modo">
+                            <?php
+                            $TURNO = ['0' => 'Ninguna', '10' => '10% DSCTO', '20' => '20% DSCTO', '100' => '100% BECADO'];
+                            foreach ($TURNO as $t => $val)
+                                echo "<option value='$t'>$val</option>\n";
+                            ?>
+                        </select>
+                    </div>
                 </div>
 
                 <hr />
@@ -151,10 +163,6 @@
         };
 
         let formDATOS = () => {
-
-            $("#evento_nombre").val($("#evento option:selected").text());
-            $("#expositor_nombre").val($("#expositor option:selected").text());
-
             let formData = new FormData();
             $(".formy, input[type='hidden'] ").each((i, v) => {
                 $input = $(v);
@@ -163,13 +171,11 @@
                     valor = $input.is(":checked") ? 1 : 0;
                 }
                 formData.append($input.attr('id'), valor);
-                /*console.log($input.attr('id'), valor);*/
             });
             return formData;
         };
 
         let emitir = async () => {
-
             let formy = document.getElementById("formy");
             formy.classList.remove('was-validated');
             if (formy.checkValidity() === false) {
@@ -208,6 +214,13 @@
                 });
         };
 
+
+
+        let buscar = async () => {
+            let formy = document.getElementById("formy");
+            //console.log(formy.evento.);
+        }
+
         const toast = (contenido, tipo = "ok", tiempo = 3000) => {
             parent.toast(contenido, tipo, tiempo);
         };
@@ -224,42 +237,9 @@
             let principal = $("#principal");
             principal.removeClass('fade');
             parent.$("#info").attr('height', principal.height() + 10);
-
-            /*
-
-                        $('#fec_ini').datepicker({
-                            format: {
-                                toDisplay: function(date, format, language) {
-                                    var d = new Date(date);                       
-                                    return d.toISOString();
-                                },
-                                toValue: function(date, format, language) {
-                                    var d = new Date(date);
-                                    d.setDate(d.getDate());
-                                    return new Date(d);
-                                }
-                            },
-                            language: "es",
-                            autoclose: true,
-                            todayHighlight: true
-                        });
-            */
             llenar(<?= ($MAT) ?>);
 
         });
     </script>
 
-    <style>
-        .datepicker,
-        .table-condensed {
-            font-size: small
-        }
-
-        .bootstrap-datetimepicker-widget table td.day,
-        .month,
-        .year {
-            line-height: 9px;
-            height: 9px;
-        }
-    </style>
 </body>
