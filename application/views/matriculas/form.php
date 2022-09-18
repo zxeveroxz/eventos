@@ -11,22 +11,21 @@
                 <?= form_open(base_url("$ORG/eventos_aperturas/save"), ['class' => '', 'id' => 'formy', 'method' => 'POST', 'autocomplete' => 'off']);
                 ?>
                 <input type="hidden" id="idx" value="0">
-
                 <div class="form-row  mb-2 ">
                     <div class="form-group col-md-3 ">
-                        <label for="evento">DOCUMENTO PARTICIPANTE</label>
+                        <label for="nro_doc">DOCUMENTO PARTICIPANTE</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="documento">
+                            <input type="text" class="form-control" id="nro_doc">
                             <input type="hidden" id="participante" value="0">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" onclick="buscar();"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button id="b" class="btn btn-primary" type="button" onclick="buscar();"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
                     <div class="form-group col-md-6 ">
                         <label for="evento">DATOS PARTICIPANTES</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" readonly="true">
+                            <input type="text" class="form-control" readonly="true" id="datos">
                         </div>
                     </div>
                     <div class="form-group col-md-1 col-6 ">
@@ -217,9 +216,76 @@
 
 
         let buscar = async () => {
-            let formy = document.getElementById("formy");
-            //console.log(formy.evento.);
+            $btn = document.getElementById("b");
+            $btn.setAttribute('disabled', '');
+            let formData2 = await formDATOS();
+            let nro_doc = document.getElementById("nro_doc");
+            formData2.append("valor", nro_doc.value);
+            formData2.append("colummna", nro_doc.id);
+
+            await fetch(`${BASE_URL}/participantes/buscar`, {
+                    method: 'POST',
+                    body: formData2
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    $participante = document.getElementById("participante");
+                    $participante.value = 0;
+                    $datos = document.getElementById("datos");
+                    $datos.value = "";
+                    if (data.RESP == false || data.RESP == null)
+                        toast("Error: No se encontro<hr>" + nro_doc.value, "error");
+                    else {
+                        $participante.value = data.RESP.idx;
+                        $datos.value = `${data.RESP.pat} ${data.RESP.mat} ${data.RESP.nombres}`;
+                    }
+                    $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+                    $btn.removeAttribute('disabled');
+                })
+                .catch((e) => {
+                    console.log('catch', e);
+                });
         }
+
+        const eventos = document.getElementById('evento');
+
+        eventos.addEventListener('change', async (event) => {
+            // console.log(`You like ${event.target.value}`);
+            event.target.setAttribute('disabled', '');
+            let formData2 = await formDATOS();
+            formData2.append("valor", event.target.value);
+            formData2.append("colummna", event.target.id);
+
+            await fetch(`${BASE_URL}/eventos_aperturas/buscarAll`, {
+                    method: 'POST',
+                    body: formData2
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    $participante = document.getElementById("participante");
+                    $participante.value = 0;
+                    $datos = document.getElementById("datos");
+                    $datos.value = "";
+                    if (data.RESP == false || data.RESP == null)
+                        toast("Error: No se encontro<hr>" + nro_doc.value, "error");
+                    else {
+                        $participante.value = data.RESP.idx;
+                        $datos.value = `${data.RESP.pat} ${data.RESP.mat} ${data.RESP.nombres}`;
+                    }
+                    $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+                    event.target.removeAttribute('disabled');
+                })
+                .catch((e) => {
+                    console.log('catch', e);
+                });
+        });
+
+
+
 
         const toast = (contenido, tipo = "ok", tiempo = 3000) => {
             parent.toast(contenido, tipo, tiempo);

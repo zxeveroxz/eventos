@@ -42,6 +42,15 @@ class Eventos_aperturas_model extends CI_Model
 		return $this->db->get_where($this->TABLA, ['codigo' => $this->CODIGO])->result();
 	}
 
+	public function search($valor,$columna)
+    {
+        return $this->db->get_where($this->TABLA, [$columna => $valor, 'codigo' => $this->CODIGO])->row();
+    }
+
+	public function search_result($valor,$columna)
+    {
+        return $this->db->get_where($this->TABLA, [$columna => $valor, 'codigo' => $this->CODIGO])->result();
+    }
 
 	public function crear($post=[])
 	{

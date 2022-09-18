@@ -119,6 +119,7 @@
         }
     </style>
     <script>
+        const BASE_URL = "<?=base_url($ORG)?>";
         window.closeModal = function() {
             $('.modal').modal('hide');
         };

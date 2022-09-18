@@ -1,19 +1,20 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Participantes extends CI_Controller {
-   
+class Participantes extends CI_Controller
+{
+
 	public $ORG = NULL;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->ORG =  strtoupper($this->uri->segments[1]);
 
-		$this->load->model('Participantes_model','PAR',true);		
-		$this->PAR->CODIGO=$this->ORG;
+		$this->load->model('Participantes_model', 'PAR', true);
+		$this->PAR->CODIGO = $this->ORG;
 
-		$this->load->model('Usuarios_model','USU',true);		
-		$this->USU->CODIGO=$this->ORG;
+		$this->load->model('Usuarios_model', 'USU', true);
+		$this->USU->CODIGO = $this->ORG;
 		//$this->participantes_model->CODIGO="....";		
 	}
 
@@ -30,9 +31,25 @@ class Participantes extends CI_Controller {
 		$this->load->view('panel/index', $data);
 	}
 
+	public function buscar($return = false)
+	{
+		$valor = $this->input->post("valor");
+		$columna = $this->input->post("colummna");
+
+		$RESP = [];
+		$RESP["RESP"] = false;
+		$RESP["TOKEN_NAME"] = $this->security->get_csrf_token_name();
+		$RESP['TOKEN_HASH'] = $this->security->get_csrf_hash();
+
+		if ($valor != "" && $columna != "") {
+			$RESP["RESP"] = $this->PAR->search($valor, $columna);
+		}
+
+		echo json_encode($RESP);
+	}
+
 	public function get($idx = null, $return = false)
 	{
-		$data = [];
 		if ($idx == null)
 			$resp = $this->PAR->getAll();
 		else {
@@ -45,8 +62,8 @@ class Participantes extends CI_Controller {
 	}
 
 	public function form($idx)
-	{		
-		if($idx==0){
+	{
+		if ($idx == 0) {
 			//$this->output->cache(3);
 		}
 		$data = [];
@@ -66,13 +83,12 @@ class Participantes extends CI_Controller {
 
 		if ($_POST["idx"] == "" || $_POST["idx"] == 0) {
 			$RESP["RESP"] = $this->PAR->crear($_POST);
-		} else {			
+		} else {
 			$RESP["RESP"] = $this->PAR->save($_POST);
 		}
 
 		echo json_encode($RESP);
 	}
-
 }
 
 /* End of file Participantes.php and path \application\controllers\Participantes.php */

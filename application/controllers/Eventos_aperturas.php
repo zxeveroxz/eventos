@@ -1,22 +1,23 @@
-<?php 
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Eventos_aperturas extends CI_Controller {
+class Eventos_aperturas extends CI_Controller
+{
 
 	public $ORG = NULL;
 	public function __construct()
 	{
 		parent::__construct();
-        $this->ORG =  strtoupper($this->uri->segments[1]);
+		$this->ORG =  strtoupper($this->uri->segments[1]);
 
-		$this->load->model('Eventos_aperturas_model','EVA',true);
-        $this->EVA->CODIGO=$this->ORG;
+		$this->load->model('Eventos_aperturas_model', 'EVA', true);
+		$this->EVA->CODIGO = $this->ORG;
 
-        $this->load->model('Eventos_model','EVE',true);
-		$this->EVE->CODIGO=$this->ORG;
+		$this->load->model('Eventos_model', 'EVE', true);
+		$this->EVE->CODIGO = $this->ORG;
 
-        $this->load->model('Expositores_model','EXP',true);
-		$this->EXP->CODIGO=$this->ORG;
+		$this->load->model('Expositores_model', 'EXP', true);
+		$this->EXP->CODIGO = $this->ORG;
 	}
 
 	public function index()
@@ -30,6 +31,40 @@ class Eventos_aperturas extends CI_Controller {
 		$data["CONTENT"] = $this->load->view('eventos_aperturas/content', $data, true);
 		$data["FOOTER"] = $this->load->view('panel/footer', $data, true);
 		$this->load->view('panel/index', $data);
+	}
+
+	public function buscar($return = false)
+	{
+		$valor = $this->input->post("valor");
+		$columna = $this->input->post("colummna");
+
+		$RESP = [];
+		$RESP["RESP"] = false;
+		$RESP["TOKEN_NAME"] = $this->security->get_csrf_token_name();
+		$RESP['TOKEN_HASH'] = $this->security->get_csrf_hash();
+
+		if ($valor != "" && $columna != "") {
+			$RESP["RESP"] = $this->EVA->search($valor, $columna);
+		}
+
+		echo json_encode($RESP);
+	}
+
+	public function buscarAll($return = false)
+	{
+		$valor = $this->input->post("valor");
+		$columna = $this->input->post("colummna");
+
+		$RESP = [];
+		$RESP["RESP"] = false;
+		$RESP["TOKEN_NAME"] = $this->security->get_csrf_token_name();
+		$RESP['TOKEN_HASH'] = $this->security->get_csrf_hash();
+
+		if ($valor != "" && $columna != "") {
+			$RESP["RESP"] = $this->EVA->search_result($valor, $columna);
+		}
+
+		echo json_encode($RESP);
 	}
 
 	public function get($idx = null, $return = false)
@@ -50,8 +85,8 @@ class Eventos_aperturas extends CI_Controller {
 	{
 		$data = [];
 		$data["ORG"] = $this->ORG;
-        $data["EVE"] = $this->EVE->getAll();
-        $data["EXP"] = $this->EXP->getAll();
+		$data["EVE"] = $this->EVE->getAll();
+		$data["EXP"] = $this->EXP->getAll();
 		$data["EVA"] = $this->get($idx, true);
 		$data["TOP"] = $this->load->view('panel/top', $data, true);
 		$this->load->view('eventos_aperturas/form', $data);
@@ -67,7 +102,7 @@ class Eventos_aperturas extends CI_Controller {
 
 		if ($_POST["idx"] == "" || $_POST["idx"] == 0) {
 			$RESP["RESP"] = $this->EVA->crear($_POST);
-		} else {			
+		} else {
 			$RESP["RESP"] = $this->EVA->save($_POST);
 		}
 

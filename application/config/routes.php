@@ -69,6 +69,8 @@ foreach($CASOS as $c){
     $route["(:any)/$c/validar"] = "$c/validar";
     $route["(:any)/$c/crear"] = "$c/crear";
     $route["(:any)/$c/save"] = "$c/save";
+    $route["(:any)/$c/buscar"] = "$c/buscar";
+    $route["(:any)/$c/buscarAll"] = "$c/buscarAll";
 }
 
 $route["(:any)/ubigeo/ver"] = "ubigeo/ver";
