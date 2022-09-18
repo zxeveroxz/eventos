@@ -18,7 +18,8 @@
                             <input type="text" class="form-control" id="nro_doc">
                             <input type="hidden" id="participante" value="0">
                             <div class="input-group-append">
-                                <button id="b" class="btn btn-primary" type="button" onclick="buscar();"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button id="b" class="btn btn-primary" type="button" onclick="buscar();"><i
+                                        class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
@@ -112,200 +113,214 @@
                 </div>
 
                 <hr />
-                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 " onclick="emitir();">Guardar</button>
-                <button type="button" class="btn btn-md btn-danger float-right" onclick="cancelar();">Cancelar/Cerrar</button>
+                <button id="submit" type="button" class="btn btn-md btn-primary mr-2 "
+                    onclick="emitir();">Guardar</button>
+                <button type="button" class="btn btn-md btn-danger float-right"
+                    onclick="cancelar();">Cancelar/Cerrar</button>
                 <?= form_close() ?>
 
             </div>
         </div>
     </div>
-    <script>
-        var numberFormat = new Intl.NumberFormat('de-DE', {
-            minimumFractionDigits: 2
-        });
-        let btn_submit = $("#submit");
-        let llenar = async (row) => {
-            $("#id").html("NUEVO");
-            $("#fecha").val(new Date().toLocaleString());
-            if (row == null) return;
+    <script type="text/javascript">
 
-            $("#id").html("EDITAR: " + row.idx);
-            $("#submit").html("Actualizar");
-            $("#idx").val(row.idx);
+    var numberFormat = new Intl.NumberFormat('de-DE', {
+        minimumFractionDigits: 2
+    });
+    let btn_submit = $("#submit");
+    let llenar = async (row) => {
+        $("#id").html("NUEVO");
+        $("#fecha").val(new Date().toLocaleString());
+        if (row == null) return;
 
-            $("#evento").val(row.evento);
-            $("#evento_nombre").val(row.evento_nombre);
-            $("#turno").val(row.turno);
-            $("#expositor").val(row.expositor);
-            $("#expositor_nombre").val(row.expositor_nombre);
-            /* $("#fec_ini").val(row.fec_ini).datepicker("update", new Date($("#fec_ini").val()));*/
-            $("#fec_ini").val(row.fec_ini);
-            $("#lecciones").val(row.lecciones);
-            $("#matricula").val(row.matricula);
+        $("#id").html("EDITAR: " + row.idx);
+        $("#submit").html("Actualizar");
+        $("#idx").val(row.idx);
 
-            $("#material").val(row.material);
-            $("#cuota_numeros").val(row.cuota_numeros);
-            $("#cuota").val(row.cuota);
-            $("#cuota_modo").val(row.cuota_modo);
-            $("#finalizado").prop("checked", row.finalizado != 0 ? true : false);
+        $("#evento").val(row.evento);
+        $("#evento_nombre").val(row.evento_nombre);
+        $("#turno").val(row.turno);
+        $("#expositor").val(row.expositor);
+        $("#expositor_nombre").val(row.expositor_nombre);
+        /* $("#fec_ini").val(row.fec_ini).datepicker("update", new Date($("#fec_ini").val()));*/
+        $("#fec_ini").val(row.fec_ini);
+        $("#lecciones").val(row.lecciones);
+        $("#matricula").val(row.matricula);
 
-            $("#fecha").val(row.fecha);
-            $("#estado").prop("checked", row.estado != 0 ? true : false);
-        };
+        $("#material").val(row.material);
+        $("#cuota_numeros").val(row.cuota_numeros);
+        $("#cuota").val(row.cuota);
+        $("#cuota_modo").val(row.cuota_modo);
+        $("#finalizado").prop("checked", row.finalizado != 0 ? true : false);
 
-
-
+        $("#fecha").val(row.fecha);
+        $("#estado").prop("checked", row.estado != 0 ? true : false);
+    };
 
 
-        let cancelar = () => {
-            window.parent.closeModal();
-        };
 
-        let formDATOS = () => {
-            let formData = new FormData();
-            $(".formy, input[type='hidden'] ").each((i, v) => {
-                $input = $(v);
-                let valor = $input.hasClass('numero') ? $input.val().replace(/,/g, '') : $input.val();
-                if ($input.attr('type') == 'checkbox') {
-                    valor = $input.is(":checked") ? 1 : 0;
-                }
-                formData.append($input.attr('id'), valor);
-            });
-            return formData;
-        };
 
-        let emitir = async () => {
-            let formy = document.getElementById("formy");
-            formy.classList.remove('was-validated');
-            if (formy.checkValidity() === false) {
-                formy.classList.add('was-validated');
-                return false;
+
+    let cancelar = () => {
+        window.parent.closeModal();
+    };
+
+    let formDATOS = () => {
+        let formData = new FormData();
+        $(".formy, input[type='hidden'] ").each((i, v) => {
+            $input = $(v);
+            let valor = $input.hasClass('numero') ? $input.val().replace(/,/g, '') : $input.val();
+            if ($input.attr('type') == 'checkbox') {
+                valor = $input.is(":checked") ? 1 : 0;
             }
+            formData.append($input.attr('id'), valor);
+        });
+        return formData;
+    };
 
-            btn_submit.attr("disabled", true).html("Procesando....");
-            await fetch($("#formy").attr("action"), {
-                    method: 'POST',
-                    body: await formDATOS()
-                })
-                .then((response) => {
-                    if (response.status != 200) {
-                        alert("Se produjo el siguiente error: " + response.statusText);
-                        cancelar();
-                        return false;
-                    } else
-                        return response.json();
-                })
-                .then((data) => {
-                    if (data.RESP > 0) {
-                        toast("Operacion realizada con exito");
-                        if ($("#idx").val() == 0) {
-                            cancelar();
-                        }
-                    } else
-                        toast("Error: No se realizo ningun cambio<hr>" + data.RESP, "error");
-                    $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
-                    btn_submit.attr("disabled", false).html("Guardar");
-
-                })
-                .catch((e) => {
-                    console.log('catch', e);
-
-                });
-        };
-
-
-
-        let buscar = async () => {
-            $btn = document.getElementById("b");
-            $btn.setAttribute('disabled', '');
-            let formData2 = await formDATOS();
-            let nro_doc = document.getElementById("nro_doc");
-            formData2.append("valor", nro_doc.value);
-            formData2.append("colummna", nro_doc.id);
-
-            await fetch(`${BASE_URL}/participantes/buscar`, {
-                    method: 'POST',
-                    body: formData2
-                })
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {
-                    $participante = document.getElementById("participante");
-                    $participante.value = 0;
-                    $datos = document.getElementById("datos");
-                    $datos.value = "";
-                    if (data.RESP == false || data.RESP == null)
-                        toast("Error: No se encontro<hr>" + nro_doc.value, "error");
-                    else {
-                        $participante.value = data.RESP.idx;
-                        $datos.value = `${data.RESP.pat} ${data.RESP.mat} ${data.RESP.nombres}`;
-                    }
-                    $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
-                    $btn.removeAttribute('disabled');
-                })
-                .catch((e) => {
-                    console.log('catch', e);
-                });
+    let emitir = async () => {
+        let formy = document.getElementById("formy");
+        formy.classList.remove('was-validated');
+        if (formy.checkValidity() === false) {
+            formy.classList.add('was-validated');
+            return false;
         }
 
-        const eventos = document.getElementById('evento');
-
-        eventos.addEventListener('change', async (event) => {
-            // console.log(`You like ${event.target.value}`);
-            event.target.setAttribute('disabled', '');
-            let formData2 = await formDATOS();
-            formData2.append("valor", event.target.value);
-            formData2.append("colummna", event.target.id);
-
-            await fetch(`${BASE_URL}/eventos_aperturas/buscarAll`, {
-                    method: 'POST',
-                    body: formData2
-                })
-                .then((response) => {
+        btn_submit.attr("disabled", true).html("Procesando....");
+        await fetch($("#formy").attr("action"), {
+                method: 'POST',
+                body: await formDATOS()
+            })
+            .then((response) => {
+                if (response.status != 200) {
+                    alert("Se produjo el siguiente error: " + response.statusText);
+                    cancelar();
+                    return false;
+                } else
                     return response.json();
-                })
-                .then((data) => {
-                    $participante = document.getElementById("participante");
-                    $participante.value = 0;
-                    $datos = document.getElementById("datos");
-                    $datos.value = "";
-                    if (data.RESP == false || data.RESP == null)
-                        toast("Error: No se encontro<hr>" + nro_doc.value, "error");
-                    else {
-                        $participante.value = data.RESP.idx;
-                        $datos.value = `${data.RESP.pat} ${data.RESP.mat} ${data.RESP.nombres}`;
+            })
+            .then((data) => {
+                if (data.RESP > 0) {
+                    toast("Operacion realizada con exito");
+                    if ($("#idx").val() == 0) {
+                        cancelar();
                     }
-                    $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
-                    event.target.removeAttribute('disabled');
-                })
-                .catch((e) => {
-                    console.log('catch', e);
-                });
-        });
+                } else
+                    toast("Error: No se realizo ningun cambio<hr>" + data.RESP, "error");
+                $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+                btn_submit.attr("disabled", false).html("Guardar");
 
+            })
+            .catch((e) => {
+                console.log('catch', e);
 
-
-
-        const toast = (contenido, tipo = "ok", tiempo = 3000) => {
-            parent.toast(contenido, tipo, tiempo);
-        };
-
-
-
-        $(document).ready(function() {
-            $("#formy").submit((e) => {
-                e.preventDefault();
             });
+    };
 
-            /*cambiar el tamaño del modal */
-            parent.$(".lloader").remove();
-            let principal = $("#principal");
-            principal.removeClass('fade');
-            parent.$("#info").attr('height', principal.height() + 10);
-            llenar(<?= ($MAT) ?>);
 
+
+    let buscar = async () => {
+        $btn = document.getElementById("b");
+        $btn.setAttribute('disabled', '');
+        let formData2 = await formDATOS();
+        let nro_doc = document.getElementById("nro_doc");
+        formData2.append("valor", nro_doc.value);
+        formData2.append("colummna", nro_doc.id);
+
+        await fetch(`${BASE_URL}/participantes/buscar`, {
+                method: 'POST',
+                body: formData2
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                $participante = document.getElementById("participante");
+                $participante.value = 0;
+                $datos = document.getElementById("datos");
+                $datos.value = "";
+                if (data.RESP == false || data.RESP == null)
+                    toast("Error: No se encontro<hr>" + nro_doc.value, "error");
+                else {
+                    $participante.value = data.RESP.idx;
+                    $datos.value = `${data.RESP.pat} ${data.RESP.mat} ${data.RESP.nombres}`;
+                }
+                $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+                $btn.removeAttribute('disabled');
+            })
+            .catch((e) => {
+                console.log('catch', e);
+            });
+    }
+
+    const eventos = document.getElementById('evento');
+    let fechas = document.getElementById('fechas');
+    let DATOS_AUX = [];
+
+    eventos.addEventListener('change', async (event) => {
+
+        let options = document.querySelectorAll('#fechas option');
+        options.forEach(o => o.remove());
+
+        fechas.options.add(new Option('Seleccione...', ''));
+
+        event.target.setAttribute('disabled', '');
+        let formData2 = await formDATOS();
+        formData2.append("valor", event.target.value);
+        formData2.append("colummna", event.target.id);
+
+        await fetch(`${BASE_URL}/eventos_aperturas/buscarAll`, {
+                method: 'POST',
+                body: formData2
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data.RESP == false || data.RESP == null)
+                    toast("Error: No se encontro<hr>" + nro_doc.value, "error");
+                else {
+                    data.RESP.map((val, index) => {
+                        fechas.options.add(new Option(val.fec_ini, val.idx));
+                        DATOS_AUX.push(val);
+                    });
+                    console.log(DATOS_AUX);
+                }
+                $("#" + data.TOKEN_NAME).val(data.TOKEN_HASH);
+                event.target.removeAttribute('disabled');
+            })
+            .catch((e) => {
+                console.log('catch', e);
+            });
+    });
+
+    fechas.addEventListener('change', async (event) => {
+
+        let ultimo = DATOS_AUX.find(element => element.idx == event.target.value);
+        console.log(ultimo);
+        
+    });
+
+
+    const toast = (contenido, tipo = "ok", tiempo = 3000) => {
+        parent.toast(contenido, tipo, tiempo);
+    };
+
+
+
+    $(document).ready(function() {
+        $("#formy").submit((e) => {
+            e.preventDefault();
         });
+
+        /*cambiar el tamaño del modal */
+        parent.$(".lloader").remove();
+        let principal = $("#principal");
+        principal.removeClass('fade');
+        parent.$("#info").attr('height', principal.height() + 10);
+        llenar(<?= ($MAT) ?>);
+
+    });
     </script>
 
 </body>
