@@ -61,7 +61,7 @@ function unir_nombre(value, row, index) {
 
 function operateFormatter(value, row, index) {
     return [
-        '<a class="editar" href="javascript:void(0)" title="Editar ' + row.nombres + '">',
+        '<a class="editar" href="javascript:void(0)" title="Editar ' + row.idx + '">',
         '<i class="fa fa-pencil-square-o" ></i> Editar',
         '</a>'
     ].join('');
