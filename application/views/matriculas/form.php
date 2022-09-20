@@ -141,13 +141,11 @@
             $("#idx").val(row.idx);
 
             $("#participante").val(row.participante);
-            $("#nro_doc").val(row.PAR.nro_doc);
+            $("#nro_doc").val(row.PAR.nro_doc).attr("disabled",true);
             $("#datos").val(`${row.PAR.pat} ${row.PAR.mat} ${row.PAR.nombres}`);
 
-            /*$("#evento").append(new Option(row.EVA.evento_nombre, row.EVA.evento)).val(row.EVA.evento);*/
-            $("#evento").val(row.EVA.evento);
+            $("#evento").val(row.EVA.evento).attr("disabled",true);
             $("#expositor_nombre").val(row.EVA.expositor_nombre);
-            /* $("#fec_ini").val(row.fec_ini).datepicker("update", new Date($("#fec_ini").val()));*/
             $("#evento_apertura").append(new Option(row.EVA.fec_ini, row.EVA.idx)).val(row.EVA.idx);
             
             $("#matricula").val(row.matricula);
@@ -156,14 +154,11 @@
             $("#cuota_numeros").val(row.cuota_numeros);
             $("#cuota").val(row.cuota);
             $("#cuota_modo").val(row.cuota_modo);
-            $("#finalizado").prop("checked", row.finalizado != 0 ? true : false);
+            $("#detalles").val(row.detalles);
 
             $("#fecha").val(row.fecha);
             $("#estado").prop("checked", row.estado != 0 ? true : false);
         };
-
-
-
 
 
         let cancelar = () => {
@@ -218,11 +213,8 @@
                 })
                 .catch((e) => {
                     console.log('catch', e);
-
                 });
         };
-
-
 
         let buscar = async () => {
             $btn = document.getElementById("b");
@@ -324,7 +316,6 @@
                 e.preventDefault();
             });
 
-            /*cambiar el tamaño del modal */
             parent.$(".lloader").remove();
             let principal = $("#principal");
             principal.removeClass('fade');
@@ -333,5 +324,4 @@
 
         });
     </script>
-
 </body>

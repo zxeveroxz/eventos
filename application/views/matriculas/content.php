@@ -24,8 +24,9 @@
                                 <th data-field="idx" data-formatter="operateFormatter" data-events="operateEvents"
                                     data-halign="center" data-align="center" data-width="35">-</th>
                                 <th data-field="evento_nombre" data-width="100" data-halign="center">Eventos</th>
-                                <th data-field="expositor_nombre" data-halign="center">Expositores</th>
                                 <th data-field="turno" data-width="30" data-halign="center">Turno</th>
+                                <th data-field="participante_nombre" data-halign="center">Participante</th>
+                                
                                 <th data-field="fec_ini" data-width="100" data-halign="center">F. Inicio</th>
 								<th data-field="lecciones" data-width="80" data-halign="center">Lecciones</th>
                                 <th data-field="estado" data-width="80" data-halign="center" data-align="center">ESTADO

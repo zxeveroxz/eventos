@@ -45,15 +45,31 @@ class Matriculas extends CI_Controller
 
 	public function get($idx = null, $return = false)
 	{
-		$data = [];
-		if ($idx == null)
+		if ($idx == null) {
 			$resp = $this->MAT->getAll();
-		else {
+			$i = 0;
+			foreach ($resp as $r) {
+				$p = $this->PAR->get($r->participante);	//participantes
+				$resp[$i]->participante_nombre = "$p->pat $p->mat $p->nombres";
+				$ea = $this->EVA->get($r->evento_apertura);	//evento_apertura
+				$resp[$i]->turno = "$ea->turno";
+				$resp[$i]->fec_ini = "$ea->fec_ini";
+				$resp[$i]->lecciones = "$ea->lecciones";
+				$e = $this->EVE->get($ea->evento);	//evento
+				$resp[$i]->evento_nombre = "$e->nombre";
+				
+				$i++;
+			}
+		} else {
 			$resp = $this->MAT->get($idx);
-			$P = $this->PAR->get($resp->idx); /**partifipantes */
-			$resp->PAR=$P; 
-			$EA = $this->EVA->get($resp->evento_apertura); /** EVENTO APERTURA */
-			$resp->EVA=$EA;
+			if ($idx != 0) {
+				$P = $this->PAR->get($resp->idx);
+				/**partifipantes */
+				$resp->PAR = $P;
+				$EA = $this->EVA->get($resp->evento_apertura);
+				/** EVENTO APERTURA */
+				$resp->EVA = $EA;
+			}
 		}
 		if ($return == true)
 			return json_encode($resp);
