@@ -63,7 +63,7 @@ class Matriculas extends CI_Controller
 		} else {
 			$resp = $this->MAT->get($idx);
 			if ($idx != 0) {
-				$P = $this->PAR->get($resp->idx);
+				$P = $this->PAR->get($resp->participante);
 				/**partifipantes */
 				$resp->PAR = $P;
 				$EA = $this->EVA->get($resp->evento_apertura);
