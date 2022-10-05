@@ -121,7 +121,7 @@
             btn_submit.attr("disabled",true).html("Procesando....");
             await fetch($("#formy").attr("action"), {
                     method: 'POST',
-                    body: await formDATOS();
+                    body: await formDATOS()
                 })
                 .then((response) => {
                     if (response.status != 200) {

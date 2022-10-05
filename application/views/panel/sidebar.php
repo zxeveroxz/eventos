@@ -23,6 +23,13 @@
 		</li>
 
 		<li class="nav-item">
+			<a class="nav-link" href="http://10.0.0.24:3000/actualizar" target="_black">
+				<i class="menu-icon typcn typcn-th-large-outline"></i>
+				<span class="menu-title">SINCRONIZAR</span>
+			</a>
+		</li>
+
+		<li class="nav-item">
 			<a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
 				<i class="menu-icon typcn typcn-document-add"></i>
 				<span class="menu-title">Configuracion</span>
