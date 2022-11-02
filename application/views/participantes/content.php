@@ -22,6 +22,7 @@
 								<th data-field="idx" data-formatter="operateFormatter" data-events="operateEvents" data-halign="center" data-align="center" data-width="35">-</th>
 
 								<th data-field="nro_doc" data-width="100" data-halign="center">DOCUMENTO</th>
+								<th data-field="photo" data-width="50" data-align="center" data-formatter="foto" data-events="operateEvents">FOTO</th>
 								<th data-field="pat" data-halign="center" data-formatter="unir_nombre">APELLIDOS Y NOMBRES</th>
 								<th data-field="telefono" data-width="100" data-halign="center">TELFONO</th>
 								<th data-field="correo" data-width="200" data-halign="center">CORREO</th>
@@ -46,8 +47,21 @@
 	</div>
 </div>
 
+<!-- Modal FOTO -->
+<div class="modal fade" id="modalFormFOTO" tabindex="-1" role="dialog" aria-labelledby="modalFormFOTOLabel" aria-hidden="true">
+	<div class="modal-dialog  modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				...
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 	var $table = $('#table');
+
+	
 
 	function unir_nombre(value, row, index) {
 		return [
@@ -63,6 +77,14 @@
 		].join('');
 	};
 
+	function foto(value, row, index) {
+		return [
+			'<a class="foto" href="javascript:void(0)">',
+			'<i class="fa fa-camera-retro" ></i>',
+			'</a>'
+		].join('');
+	};
+
 
 	window.operateEvents = {
 		'click .editar': function(e, value, row, index) {
@@ -72,7 +94,17 @@
 				.modal('show')
 				.find('.modal-body')
 				.html('<iframe src="<?= base_url("$ORG/participantes/form/") ?>' + row.idx + '" style="border:none" id="info" height="70px" width="100%"></iframe>');
+		},
+
+		'click .foto': function(e, value, row, index) {
+			
+			$('#modalFormFOTO')
+				.removeData('bs.modal')
+				.modal('show')
+				.find('.modal-body')
+				.html('<iframe src="<?= base_url("$ORG/participantes/foto/") ?>' + row.idx + '/'+ row.nro_doc+'" style="border:none" id="info" height="480" width="100%"></iframe>');
 		}
+
 	};
 
 	$('.modal').on('hidden.bs.modal', function(event) {

@@ -74,6 +74,27 @@ class Participantes extends CI_Controller
 		//sleep(2);
 	}
 
+	public function foto($idx,$dni)
+	{
+		if ($idx == 0) {
+			//$this->output->cache(3);
+		}
+		$this->load->library("dni");
+		$this->dni->foto($dni);
+
+		echo "<p style='text-align: center'><h1>DNI: $dni</h1><img src='".base_url("dni/".$dni).".jpg' style=\"max-width: 240px; height:320; border:6px solid black; margin: 10px auto\"  /></p>";
+		/*
+		$data = [];
+		$data["ORG"] = $this->ORG;
+		$data["PAR"] = $this->get($idx, true);
+		$data["TOP"] = $this->load->view('panel/top', $data, true);
+		$this->load->view('participantes/form', $data);
+		//sleep(2);
+		*/
+	}
+
+
+
 	public function save()
 	{
 		$RESP = [];

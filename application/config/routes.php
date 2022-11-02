@@ -71,6 +71,7 @@ foreach($CASOS as $c){
     $route["(:any)/$c/save"] = "$c/save";
     $route["(:any)/$c/buscar"] = "$c/buscar";
     $route["(:any)/$c/buscarAll"] = "$c/buscarAll";
+    $route["(:any)/$c/foto/(:any)/(:any)"] = "$c/foto/$2/$3";
 }
 
 $route["(:any)/ubigeo/ver"] = "ubigeo/ver";
