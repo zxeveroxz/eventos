@@ -78,6 +78,8 @@ $route["(:any)/ubigeo/dep"] = "ubigeo/dep";
 $route["(:any)/ubigeo/pro/(:any)"] = "ubigeo/pro/$2";
 $route["(:any)/ubigeo/dis/(:any)/(:any)"] = "ubigeo/dis/$2/$3";
 
+$route["(:any)/varios/dni_buscar/(:any)"] = "varios/dni_buscar/$2"; 
+
 
 
 $route['default_controller'] = 'logeo';

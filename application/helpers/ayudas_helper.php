@@ -1,5 +1,15 @@
 <?php
 
+function dni_clientes($dni){        
+
+	$ctx = stream_context_create(['http' => ['timeout' => 15]]);
+	if (false !== ($content = file_get_contents('http://25.21.196.223/dni.php?DNY='.$dni, false, $ctx))) {
+		return $content."";
+	} else {
+		return 'No Disponible...';
+	}
+}
+
 function mensaje_error()
 {
 	$CI = &get_instance();

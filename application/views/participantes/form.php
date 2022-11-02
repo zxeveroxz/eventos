@@ -212,6 +212,29 @@
             });
     };
 
+    let consultar = async () => {
+        
+        await fetch(BASE_URL, {
+                method: 'POST',
+                body: await formDATOS()
+            })
+            .then((response) => {
+                if (response.status != 200) {
+                    alert("Se produjo el siguiente error: " + response.statusText);                    
+                    return false;
+                } else
+                    return response.json();
+            })
+            .then((data) => {
+                alert(data);
+
+            })
+            .catch((e) => {
+                console.log('catch', e);
+
+            });
+    };
+
     const toast = (contenido, tipo = "ok", tiempo = 3000) => {
         parent.toast(contenido, tipo, tiempo);
     };
