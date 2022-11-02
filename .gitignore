@@ -22,8 +22,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /nbproject/
 .idea/*
 
-#dni/*
-#!dni/no.jpg
+dni/*
+!dni/no.jpg
 
 dni/*
 
